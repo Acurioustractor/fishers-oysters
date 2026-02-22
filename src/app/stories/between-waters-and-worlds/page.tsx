@@ -3,9 +3,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Between Waters and Worlds — A Day on Quandamooka Country',
+  title: 'Between Waters and Worlds: A Day on Quandamooka Country',
   description:
-    'A reflective account of a day spent with Shaun Fisher on Quandamooka sea country — oyster leases, cultural knowledge, and the quiet work of building something that matters.',
+    'A reflective account of a day spent with Shaun Fisher on Quandamooka sea country, exploring oyster leases, cultural knowledge, and the quiet work of building something that matters.',
 };
 
 export default function BetweenWatersStory() {
@@ -36,7 +36,7 @@ export default function BetweenWatersStory() {
         <div className="container">
           <div className="max-w-3xl mx-auto prose prose-lg">
             <p className="lead text-xl text-gray-600">
-              At 6:30am we board the Stradbroke Flyer — a pilgrimage of sorts,
+              At 6:30am we board the Stradbroke Flyer, a pilgrimage of sorts,
               each visit deepening an understanding of a place where knowledge,
               strength, and discovery flow like the tides around the island.
             </p>
@@ -52,7 +52,7 @@ export default function BetweenWatersStory() {
             <p>
               When Shaun returns, he shows us a clearing near his oyster lease.
               He sees community gathering places, boat sheds, training
-              facilities, and healing spaces — an integrated ecosystem linking
+              facilities, and healing spaces: an integrated ecosystem linking
               economic prosperity with wellbeing and connection to Country.
             </p>
           </div>
@@ -79,7 +79,7 @@ export default function BetweenWatersStory() {
               Driving across the island, Shaun describes Elders directing the
               creation of skeleton effigies to protect sacred sites threatened by
               a proposed whale research centre. The layers of complexity here run
-              deep — disease decimating seventy percent of the population
+              deep: disease decimating seventy percent of the population
               centuries ago, sand mining destroying over half the island and
               dozens of sacred sites, and ongoing pressures from privileged
               encroachment.
@@ -88,7 +88,7 @@ export default function BetweenWatersStory() {
             <h2 className="text-primary">Waters of Continuity</h2>
             <p>
               We pause at a natural stream Shaun has visited for decades and now
-              shares with his children. It represents continuity and sustenance —
+              shares with his children. It represents continuity and sustenance,
               a gathering place where generations have cooled themselves and
               harvested food. Some things endure despite everything.
             </p>
@@ -119,11 +119,11 @@ export default function BetweenWatersStory() {
           <div className="max-w-3xl mx-auto prose prose-lg">
             <h2 className="text-primary">Convergence on Salt Water</h2>
             <p>
-              At the oyster farm, different streams converge — Shaun the local
+              At the oyster farm, different streams converge. Shaun the local
               visionary, visitors carrying knowledge from other Country,
               facilitators weaving connection, and us as witnesses. Shaun
               demonstrates technique while discussing how the farm represents
-              more than livelihood — it&rsquo;s a platform for cultural
+              more than livelihood. It&rsquo;s a platform for cultural
               continuity, family support, and community prosperity.
             </p>
             <p>
@@ -150,7 +150,7 @@ export default function BetweenWatersStory() {
             <h2 className="text-primary">Walking Together</h2>
             <p>
               As the day ends, Shaun supports an Elder as they walk back to the
-              boat — a quiet image of care between knowledge holders. It says
+              boat, a quiet image of care between knowledge holders. It says
               more than any business plan could.
             </p>
 
@@ -168,7 +168,7 @@ export default function BetweenWatersStory() {
 
             <blockquote>
               <p>
-                The farm represents more than livelihood — it&rsquo;s a platform
+                The farm represents more than livelihood. It&rsquo;s a platform
                 for cultural continuity, family support, and community
                 prosperity.
               </p>

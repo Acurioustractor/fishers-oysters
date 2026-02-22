@@ -27,7 +27,7 @@ export default function ToursPage() {
               of years.
             </p>
             <p>
-              Shaun takes groups out onto the leases in Moreton Bay — you'll see
+              Shaun takes groups out onto the leases in Moreton Bay. You'll see
               how oysters are grown, hear about the connection between
               aquaculture and cultural practice, and taste oysters fresh from the
               water.
@@ -55,7 +55,7 @@ export default function ToursPage() {
               },
               {
                 title: 'Quandamooka Culture',
-                description: 'Hear about the cultural connection to sea country — the knowledge behind the aquaculture.',
+                description: 'Hear about the cultural connection to sea country and the knowledge behind the aquaculture.',
               },
               {
                 title: 'Fresh Oyster Tasting',

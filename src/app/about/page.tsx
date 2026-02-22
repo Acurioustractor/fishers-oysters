@@ -5,7 +5,7 @@ import QuoteBlock from '@/components/QuoteBlock';
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'The story of Fishers Oysters — Shaun Fisher is building an Indigenous-led aquaculture enterprise on Quandamooka country, Moreton Bay.',
+  description: 'The story of Fishers Oysters. Shaun Fisher is building an Indigenous-led aquaculture enterprise on Quandamooka country, Moreton Bay.',
 };
 
 export default function AboutPage() {
@@ -25,14 +25,14 @@ export default function AboutPage() {
             <p>
               Shaun Fisher is a Mununjali, Gorenpul Man who started an oyster enterprise with
               $500 and four leases in Moreton Bay, off Minjerribah (North Stradbroke
-              Island). No investors, no business plan — just sea country knowledge,
+              Island). No investors, no business plan. Just sea country knowledge,
               hard work, and a belief that Indigenous people should be leading
               aquaculture on their own waters.
             </p>
             <p>
               Fishers Oysters grows premium oysters while restoring the
               reef ecosystems that have sustained Quandamooka people for tens of
-              thousands of years. The long-term vision is to build a cooperative —
+              thousands of years. The long-term vision is to build a cooperative,
               bringing in more families, creating jobs for marginalised young people
               and community members who need a pathway into work.
             </p>
@@ -78,22 +78,22 @@ export default function AboutPage() {
                 {
                   number: '01',
                   title: 'Start with Traditional Knowledge',
-                  description: 'The land and sea have been managed by Indigenous peoples for millennia. Any enterprise has to begin with the knowledge systems that already exist — not imported frameworks.',
+                  description: 'The land and sea have been managed by Indigenous peoples for millennia. Any enterprise has to begin with the knowledge systems that already exist, not imported frameworks.',
                 },
                 {
                   number: '02',
                   title: 'Build Collectively',
-                  description: 'The goal is a cooperative — shared ownership, shared risk, shared benefit. Not one person carrying everything, but families and community working together over time.',
+                  description: 'The goal is a cooperative: shared ownership, shared risk, shared benefit. Not one person carrying everything, but families and community working together over time.',
                 },
                 {
                   number: '03',
                   title: 'Integrate Knowledge Systems',
-                  description: 'Traditional ecological knowledge and modern marine science aren\'t opposed — they\'re complementary. The best outcomes come from weaving them together.',
+                  description: 'Traditional ecological knowledge and modern marine science aren\'t opposed. They\'re complementary. The best outcomes come from weaving them together.',
                 },
                 {
                   number: '04',
                   title: 'Lead on Environment',
-                  description: 'Voluntary seasonal closures, habitat restoration, monitoring species return. Environmental leadership isn\'t a cost — it\'s the foundation of everything.',
+                  description: 'Voluntary seasonal closures, habitat restoration, monitoring species return. Environmental leadership isn\'t a cost. It\'s the foundation of everything.',
                 },
                 {
                   number: '05',
@@ -130,20 +130,20 @@ export default function AboutPage() {
             <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
               <p>
                 Right now Fishers Oysters is Shaun and the leases. But the enterprise
-                is built to grow into something bigger — a cooperative model where
+                is built to grow into something bigger: a cooperative model where
                 multiple families share in the ownership and the work.
               </p>
               <p>
                 Shaun is particularly focused on creating pathways for marginalised
                 young people and community members who need work. Aquaculture is
-                physical, outdoor, skilled work on country — the kind of employment
+                physical, outdoor, skilled work on country. It's the kind of employment
                 that can change someone's trajectory.
               </p>
               <p>
                 The vision is also about replication. If this model works on
                 Quandamooka country, it can work on other coastal Indigenous country
                 too. The cooperative structure, the integration of traditional
-                knowledge, the environmental approach — it's all designed to be shared.
+                knowledge, the environmental approach: it's all designed to be shared.
               </p>
             </div>
           </div>
@@ -168,7 +168,7 @@ export default function AboutPage() {
                 <p className="text-gray-600 leading-relaxed">
                   Aquaculturist and social enterprise builder.
                   Shaun started Fisher&rsquo;s Oysters to prove that Indigenous communities
-                  can lead sustainable marine industries on their own country — and
+                  can lead sustainable marine industries on their own country and
                   create real economic pathways for people who need them most.
                 </p>
               </div>
@@ -185,7 +185,7 @@ export default function AboutPage() {
           </h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
             Whether you want to buy oysters, partner with us, or just learn
-            more about what we're building — reach out.
+            more about what we're building, reach out.
           </p>
           <a href="/contact" className="btn bg-white text-primary hover:bg-gray-100">
             Contact Us

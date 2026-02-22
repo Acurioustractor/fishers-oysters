@@ -80,10 +80,10 @@ export default function HomePage() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="section-heading text-primary">Our Story</h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              Shaun Fisher — Mununjali, Gorenpul Man — started Fisher&rsquo;s Oysters with $500 and four oyster leases
+              Shaun Fisher, a Mununjali, Gorenpul Man, started Fisher&rsquo;s Oysters with $500 and four oyster leases
               in Moreton Bay. The goal: build an Indigenous-led aquaculture enterprise
               on Quandamooka country that restores reef ecosystems and creates real
-              jobs for community — especially young people and those who need a pathway.
+              jobs for community, especially young people and those who need a pathway.
             </p>
             <a href="/about" className="btn-outline">
               Read our story &rarr;
