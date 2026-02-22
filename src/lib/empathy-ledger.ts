@@ -1,8 +1,8 @@
 /**
  * Empathy Ledger Integration
  *
- * Fetches stories and storyteller data from Empathy Ledger API.
- * Respects consent - only shows stories with EXTERNAL consent scope.
+ * Fetches stories from Empathy Ledger v1 Content Hub API.
+ * Uses project-scoped endpoint to only return Fisher's Oysters stories.
  */
 
 export interface Story {
@@ -25,7 +25,7 @@ export interface Storyteller {
   stories: Story[];
 }
 
-const API_URL = process.env.EMPATHY_LEDGER_API_URL || 'https://empathy-ledger-v2.vercel.app/api';
+const API_BASE = process.env.EMPATHY_LEDGER_API_BASE || 'https://empathy-ledger-v2.vercel.app/api';
 const PROJECT_SLUG = process.env.EMPATHY_LEDGER_PROJECT_SLUG || 'fishers-oysters';
 
 interface GetStoriesOptions {
@@ -34,27 +34,27 @@ interface GetStoriesOptions {
   storytellerId?: string;
 }
 
+interface ContentHubStory {
+  id: string;
+  title: string;
+  summary?: string;
+  authorName?: string;
+  publishedAt?: string;
+  themes?: { name: string }[];
+  isPublic?: boolean;
+}
+
 /**
- * Fetch stories for this project from Empathy Ledger
+ * Fetch stories for this project from Empathy Ledger Content Hub
  */
 export async function getStories(options: GetStoriesOptions = {}): Promise<Story[]> {
-  const { limit = 10, offset = 0, storytellerId } = options;
+  const { limit = 10 } = options;
 
   try {
-    const params = new URLSearchParams({
-      project: PROJECT_SLUG,
-      limit: String(limit),
-      offset: String(offset),
-      consent: 'EXTERNAL', // Only external consent stories
-    });
-
-    if (storytellerId) {
-      params.append('storyteller', storytellerId);
-    }
-
-    const response = await fetch(`${API_URL}/stories?${params}`, {
-      next: { revalidate: 3600 }, // Cache for 1 hour
-    });
+    const response = await fetch(
+      `${API_BASE}/v1/content-hub/stories?project=${PROJECT_SLUG}`,
+      { next: { revalidate: 3600 } }
+    );
 
     if (!response.ok) {
       console.error('Empathy Ledger API error:', response.status);
@@ -62,7 +62,18 @@ export async function getStories(options: GetStoriesOptions = {}): Promise<Story
     }
 
     const data = await response.json();
-    return data.stories || [];
+    const stories: Story[] = (data.stories || [])
+      .slice(0, limit)
+      .map((s: ContentHubStory) => ({
+        id: s.id,
+        title: s.title,
+        excerpt: s.summary,
+        storyteller: s.authorName,
+        publishedAt: s.publishedAt,
+        tags: s.themes?.map((t) => t.name) || [],
+      }));
+
+    return stories;
   } catch (error) {
     console.error('Failed to fetch stories:', error);
     return [];
@@ -74,7 +85,7 @@ export async function getStories(options: GetStoriesOptions = {}): Promise<Story
  */
 export async function getStory(id: string): Promise<Story | null> {
   try {
-    const response = await fetch(`${API_URL}/stories/${id}`, {
+    const response = await fetch(`${API_BASE}/stories/${id}`, {
       next: { revalidate: 3600 },
     });
 
@@ -94,7 +105,7 @@ export async function getStory(id: string): Promise<Story | null> {
  */
 export async function getStorytellers(): Promise<Storyteller[]> {
   try {
-    const response = await fetch(`${API_URL}/storytellers?project=${PROJECT_SLUG}`, {
+    const response = await fetch(`${API_BASE}/storytellers?project=${PROJECT_SLUG}`, {
       next: { revalidate: 3600 },
     });
 

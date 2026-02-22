@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import config from '../../project.config.json';
 
 export default function Header() {
@@ -18,8 +19,9 @@ export default function Header() {
         <div className="container">
           <nav className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="font-display text-xl font-bold text-primary">
-              {config.name}
+            <Link href="/" className="flex items-center gap-1">
+              <Image src="/images/logo-icon.png" alt="" width={80} height={64} className="-my-3" />
+              <span className="font-display text-xl font-bold text-primary">{config.name}</span>
             </Link>
 
             {/* Desktop Navigation */}

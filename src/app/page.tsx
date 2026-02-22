@@ -63,12 +63,12 @@ export default function HomePage() {
           </h2>
           <Gallery
             images={[
-              { alt: 'Oyster leases at low tide, Moreton Bay' },
-              { alt: 'Shaun working the leases' },
-              { alt: 'Fresh oysters ready for market' },
-              { alt: 'Moreton Bay from above' },
-              { alt: 'Oyster baskets on the sandflat' },
-              { alt: 'Sea country, Minjerribah' },
+              { src: '/images/aerial-oyster-leases.jpg', alt: 'Oyster leases at low tide, Moreton Bay' },
+              { src: '/images/fisher-portrait.jpg', alt: 'Shaun Fisher on the oyster flats' },
+              { src: '/images/working-oyster-baskets.jpg', alt: 'Working the oyster baskets' },
+              { src: '/images/between-lease-poles.jpg', alt: 'Working between oyster lease poles' },
+              { src: '/images/group-oyster-flats.jpg', alt: 'Team on the oyster flats' },
+              { src: '/images/oyster-tripods.jpg', alt: 'Oyster lease tripods at low tide' },
             ]}
           />
         </div>
@@ -80,7 +80,7 @@ export default function HomePage() {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="section-heading text-primary">Our Story</h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              Shaun Fisher started Fishers Oysters with $500 and four oyster leases
+              Shaun Fisher — Mununjali, Gorenpul Man — started Fisher&rsquo;s Oysters with $500 and four oyster leases
               in Moreton Bay. The goal: build an Indigenous-led aquaculture enterprise
               on Quandamooka country that restores reef ecosystems and creates real
               jobs for community — especially young people and those who need a pathway.

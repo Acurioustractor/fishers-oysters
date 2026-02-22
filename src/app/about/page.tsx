@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Hero from '@/components/Hero';
 import QuoteBlock from '@/components/QuoteBlock';
-import ImagePlaceholder from '@/components/ImagePlaceholder';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -23,7 +23,7 @@ export default function AboutPage() {
           <div className="max-w-3xl mx-auto prose prose-lg">
             <h2 className="text-primary">How It Started</h2>
             <p>
-              Shaun Fisher is a Quandamooka man who started an oyster enterprise with
+              Shaun Fisher is a Mununjali, Gorenpul Man who started an oyster enterprise with
               $500 and four leases in Moreton Bay, off Minjerribah (North Stradbroke
               Island). No investors, no business plan — just sea country knowledge,
               hard work, and a belief that Indigenous people should be leading
@@ -49,7 +49,9 @@ export default function AboutPage() {
       <section className="section bg-white pb-0">
         <div className="container">
           <div className="max-w-4xl mx-auto">
-            <ImagePlaceholder alt="Shaun Fisher on the oyster leases, Moreton Bay" />
+            <div className="relative aspect-video rounded-xl overflow-hidden">
+              <Image src="/images/between-lease-poles.jpg" alt="Shaun Fisher on the oyster leases, Moreton Bay" fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" />
+            </div>
           </div>
         </div>
       </section>
@@ -154,16 +156,18 @@ export default function AboutPage() {
           <div className="max-w-3xl mx-auto">
             <div className="bg-gray-50 rounded-2xl p-8 md:p-10 md:flex md:gap-8 md:items-start">
               <div className="shrink-0 mb-6 md:mb-0">
-                <ImagePlaceholder alt="Shaun Fisher" aspect="square" className="w-40 h-40 md:w-48 md:h-48" />
+                <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-xl overflow-hidden">
+                  <Image src="/images/fisher-portrait.jpg" alt="Shaun Fisher" fill className="object-cover" sizes="192px" />
+                </div>
               </div>
               <div>
                 <h3 className="font-display text-2xl font-bold text-foreground mb-1">
                   Shaun Fisher
                 </h3>
-                <p className="text-primary mb-4">Founder</p>
+                <p className="text-primary mb-4">Mununjali, Gorenpul Man &middot; Owner Operator</p>
                 <p className="text-gray-600 leading-relaxed">
-                  Quandamooka man, aquaculturist, and social enterprise builder.
-                  Shaun started Fishers Oysters to prove that Indigenous communities
+                  Aquaculturist and social enterprise builder.
+                  Shaun started Fisher&rsquo;s Oysters to prove that Indigenous communities
                   can lead sustainable marine industries on their own country — and
                   create real economic pathways for people who need them most.
                 </p>

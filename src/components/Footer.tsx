@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import config from '../../project.config.json';
 
 export default function Footer() {
@@ -22,9 +23,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="font-display text-xl font-bold text-white mb-4">
-              {config.name}
-            </h3>
+            <Image src="/images/logo-full.png" alt={config.name} width={220} height={100} className="mb-4" />
             <p className="text-sm text-gray-400">
               {config.tagline}
             </p>

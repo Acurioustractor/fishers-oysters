@@ -85,6 +85,7 @@
     { "label": "Oyster Tours", "href": "/tours" },
     { "label": "Oyster Sales", "href": "/sales" },
     { "label": "Culture, Justice & Jobs", "href": "/culture" },
+    { "label": "Stories", "href": "/stories" },
     { "label": "Contact", "href": "/contact" }
   ],
   "social": {

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import ImagePlaceholder from './ImagePlaceholder';
 
 interface GalleryImage {
@@ -19,9 +20,15 @@ export default function Gallery({ images, columns = 3 }: GalleryProps) {
 
   return (
     <div className={`grid ${gridClass} gap-4`}>
-      {images.map((image, i) => (
-        <ImagePlaceholder key={i} alt={image.alt} />
-      ))}
+      {images.map((image, i) =>
+        image.src ? (
+          <div key={i} className="relative aspect-video rounded-xl overflow-hidden">
+            <Image src={image.src} alt={image.alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+          </div>
+        ) : (
+          <ImagePlaceholder key={i} alt={image.alt} />
+        )
+      )}
     </div>
   );
 }

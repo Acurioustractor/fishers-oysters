@@ -9,36 +9,21 @@ export const metadata: Metadata = {
   description: `Community voices and stories from ${config.name}`,
 };
 
-const seedStories: Story[] = [
-  {
-    id: 'seed-1',
-    title: 'Five Principles for Indigenous Aquaculture',
-    excerpt: 'From a workshop presentation by Shaun Fisher — the five principles that guide Fishers Oysters and could guide other Indigenous enterprises on sea country.',
-    quote: "Don't start with a business plan. Start with your Elders.",
-    storyteller: 'Shaun Fisher',
-    tags: ['workshop', 'principles', 'aquaculture'],
-  },
-  {
-    id: 'seed-2',
-    title: 'Weaving Old Knowledge and New Technology',
-    excerpt: 'How the next generation at Fishers Oysters combines traditional ecological knowledge with app development, marine biology, and modern aquaculture science.',
-    quote: "These young people aren't choosing between traditional knowledge and modern technology. They're weaving them together.",
-    storyteller: 'Shaun Fisher',
-    tags: ['youth', 'innovation', 'technology'],
-  },
-  {
-    id: 'seed-3',
-    title: 'The Sea Country Has Been Waiting',
-    excerpt: 'The story of returning to Quandamooka sea country — restoring oyster reefs, rebuilding cultural connection, and creating economic sovereignty from $500.',
-    quote: 'The sea country has been waiting for us to come home.',
-    storyteller: 'Shaun Fisher',
-    tags: ['culture', 'origin', 'country'],
-  },
-];
+const featuredStory: Story = {
+  id: 'featured-1',
+  title: 'Between Waters and Worlds: A Day on Quandamooka Country',
+  excerpt: 'A reflective account of a day spent with Shaun Fisher on Quandamooka sea country — oyster leases, cultural knowledge, and the quiet work of building something that matters.',
+  coverImage: '/images/walking-to-boat.jpg',
+  storyteller: 'Benjamin Knight',
+  url: '/stories/between-waters-and-worlds',
+  publishedAt: '2025-03-25',
+  tags: ['culture', 'country', 'aquaculture'],
+};
 
 export default async function StoriesPage() {
-  const apiStories = await getStories();
-  const stories = apiStories.length > 0 ? apiStories : seedStories;
+  // TODO: Re-enable when real stories are added to Empathy Ledger
+  // const apiStories = await getStories();
+  const stories = [featuredStory];
 
   return (
     <>

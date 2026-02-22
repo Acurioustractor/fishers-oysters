@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Hero from '@/components/Hero';
 import QuoteBlock from '@/components/QuoteBlock';
-import ImagePlaceholder from '@/components/ImagePlaceholder';
 
 export const metadata: Metadata = {
   title: 'Culture, Justice & Jobs',
@@ -108,7 +108,9 @@ export default function CulturePage() {
       <section className="section pb-0">
         <div className="container">
           <div className="max-w-4xl mx-auto">
-            <ImagePlaceholder alt="Working on country — aquaculture on Quandamooka sea country" />
+            <div className="relative aspect-video rounded-xl overflow-hidden">
+              <Image src="/images/working-flats.jpg" alt="Working on country — aquaculture on Quandamooka sea country" fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" />
+            </div>
           </div>
         </div>
       </section>

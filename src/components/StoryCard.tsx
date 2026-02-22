@@ -48,8 +48,7 @@ export default function StoryCard({ story }: StoryCardProps) {
           <a
             href={story.url}
             className="text-primary font-medium hover:underline"
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(story.url.startsWith('/') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
           >
             Read Full Story &rarr;
           </a>

@@ -93,10 +93,10 @@ export default function ToursPage() {
           <Gallery
             columns={2}
             images={[
-              { alt: 'Walking the oyster leases at low tide' },
-              { alt: 'Fresh oyster tasting on country' },
-              { alt: 'Moreton Bay from the leases' },
-              { alt: 'Quandamooka sea country' },
+              { src: '/images/walking-to-boat.jpg', alt: 'Walking the oyster leases at low tide' },
+              { src: '/images/group-oyster-flats.jpg', alt: 'Group tour on the oyster flats' },
+              { src: '/images/aerial-oyster-leases.jpg', alt: 'Moreton Bay from above' },
+              { src: '/images/inspecting-spat.jpg', alt: 'Inspecting oyster spat on country' },
             ]}
           />
         </div>

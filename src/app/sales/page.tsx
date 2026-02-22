@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Hero from '@/components/Hero';
 import QuoteBlock from '@/components/QuoteBlock';
-import ImagePlaceholder from '@/components/ImagePlaceholder';
 
 export const metadata: Metadata = {
   title: 'Oyster Sales',
@@ -100,7 +100,9 @@ export default function SalesPage() {
       <section className="section pb-0">
         <div className="container">
           <div className="max-w-4xl mx-auto">
-            <ImagePlaceholder alt="Fresh oysters from Moreton Bay" />
+            <div className="relative aspect-video rounded-xl overflow-hidden">
+              <Image src="/images/working-oyster-baskets.jpg" alt="Fresh oysters from Moreton Bay" fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" />
+            </div>
           </div>
         </div>
       </section>
