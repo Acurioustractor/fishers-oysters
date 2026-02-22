@@ -1,0 +1,100 @@
+{
+  "projectCode": "ACT-FO",
+  "name": "Fishers Oysters",
+  "slug": "fishers-oysters",
+  "tagline": "Restoring oyster reefs, restoring sovereignty",
+  "description": "Indigenous-led aquaculture on Quandamooka country. Shaun Fisher is building an oyster enterprise in Moreton Bay — growing premium oysters, restoring reef ecosystems, and creating jobs for community.",
+  "theme": "earth",
+  "content": {
+    "hero": {
+      "heading": "Restoring oyster reefs, restoring sovereignty",
+      "subheading": "Indigenous-led aquaculture on Quandamooka country, Moreton Bay",
+      "cta": { "label": "Get in Touch", "href": "/contact" }
+    },
+    "about": {
+      "intro": "Fishers Oysters is an Indigenous-led aquaculture enterprise on Quandamooka country, combining ecological restoration with economic sovereignty on Moreton Bay.",
+      "mission": "To restore Moreton Bay's oyster reefs while building economic sovereignty for the next generation of Indigenous aquaculturists.",
+      "values": [
+        { "title": "Country First", "description": "Caring for sea country through sustainable aquaculture that restores reef ecosystems." },
+        { "title": "Community Grown", "description": "Built by community, for community. Every oyster supports Indigenous enterprise." },
+        { "title": "Quality Driven", "description": "Premium oysters grown in the pristine waters of Moreton Bay." },
+        { "title": "Knowledge Sharing", "description": "Passing on traditional knowledge and building pathways for the next generation." }
+      ]
+    },
+    "stats": [
+      { "value": "4", "label": "Oyster Leases" },
+      { "value": "1000s", "label": "Oysters Growing" },
+      { "value": "1", "label": "Family, Growing" },
+      { "value": "60k+", "label": "Years of Sea Country Knowledge" }
+    ],
+    "offerings": [
+      {
+        "title": "Premium Oysters",
+        "description": "Premium oysters sustainably grown in the pristine waters of Moreton Bay. Wholesale and direct sales.",
+        "href": "/sales",
+        "icon": "oyster"
+      },
+      {
+        "title": "Oyster Tours",
+        "description": "Walk our leases, taste fresh oysters, and experience Quandamooka sea country with the people who know it best.",
+        "href": "/tours",
+        "icon": "compass"
+      },
+      {
+        "title": "Culture, Justice & Jobs",
+        "description": "Creating pathways for marginalised young people and community through aquaculture.",
+        "href": "/culture",
+        "icon": "community"
+      }
+    ],
+    "quote": {
+      "text": "The real story is that we're proving Indigenous communities can lead sustainable marine management while building economic independence.",
+      "attribution": "Shaun Fisher"
+    },
+    "cta": {
+      "heading": "The Sea Country Has Been Waiting",
+      "text": "Whether you want to order oysters, book a tour, or support Indigenous-led aquaculture — we'd love to hear from you.",
+      "button": { "label": "Contact Us", "href": "/contact" }
+    },
+    "stories": {
+      "heading": "Our Story",
+      "subheading": "Voices from the water"
+    }
+  },
+  "ecosystem": {
+    "enabled": false,
+    "name": "A Curious Tractor",
+    "url": "https://acurioustractor.com.au"
+  },
+  "integrations": {
+    "empathyLedger": {
+      "enabled": true,
+      "projectSlug": "fishers-oysters"
+    },
+    "ghl": {
+      "enabled": false,
+      "locationId": ""
+    },
+    "notion": {
+      "enabled": false,
+      "pageId": "17bebcf981cf801b9a06edf3f35bf7f4"
+    }
+  },
+  "navigation": [
+    { "label": "About Us", "href": "/about" },
+    { "label": "Oyster Tours", "href": "/tours" },
+    { "label": "Oyster Sales", "href": "/sales" },
+    { "label": "Culture, Justice & Jobs", "href": "/culture" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "social": {
+    "facebook": "",
+    "instagram": "",
+    "linkedin": ""
+  },
+  "contact": {
+    "email": "fishers.oysters@gmail.com",
+    "phone": "",
+    "address": "Quandamooka Country, North Stradbroke Island (Minjerribah), Moreton Bay, Queensland"
+  }
+}

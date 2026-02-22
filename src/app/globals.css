@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #4A6741;
+    --secondary: #8B7355;
+    --accent: #D4A574;
+    --background: #F5F3EF;
+    --foreground: #2D3B2D;
+  }
+
+  body {
+    @apply antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3
+           font-medium rounded-lg transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary text-white hover:opacity-90;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-primary text-primary
+           hover:bg-primary hover:text-white;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-heading {
+    @apply text-3xl md:text-4xl font-display font-bold mb-6;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm overflow-hidden
+           transition-shadow hover:shadow-md;
+  }
+
+  /* Stats */
+  .stat-card {
+    @apply text-center p-6;
+  }
+
+  .stat-value {
+    @apply text-4xl md:text-5xl font-display font-bold text-primary;
+  }
+
+  .stat-label {
+    @apply text-sm text-gray-600 mt-1 uppercase tracking-wide;
+  }
+
+  /* Quote */
+  .quote-block {
+    @apply relative py-12 px-6 md:px-12;
+  }
+
+  .quote-block blockquote {
+    @apply text-2xl md:text-3xl font-display text-foreground leading-relaxed;
+  }
+
+  .quote-attribution {
+    @apply mt-4 text-lg text-secondary font-medium;
+  }
+
+  /* Offering Card */
+  .offering-card {
+    @apply bg-white rounded-2xl p-8 shadow-sm hover:shadow-md
+           transition-shadow text-center;
+  }
+
+  .offering-icon {
+    @apply w-16 h-16 mx-auto mb-6 text-primary;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

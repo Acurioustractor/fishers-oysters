@@ -1,0 +1,33 @@
+{
+  "name": "fishers-oysters",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Indigenous-led aquaculture enterprise combining ecological restoration with economic sovereignty on Moreton Bay",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "sync": "node ../act-ecosystem/scripts/generators/sync-content.mjs ACT-FO --output ."
+  },
+  "dependencies": {
+    "next": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^3.4.0",
+    "@tailwindcss/typography": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "typescript": "^5"
+  },
+  "act": {
+    "projectCode": "ACT-FO",
+    "theme": "earth",
+    "generatedAt": "2026"
+  }
+}
