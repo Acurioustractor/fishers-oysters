@@ -38,9 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${raleway.variable} ${aleo.variable} min-h-screen bg-background text-foreground font-sans`}>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
