@@ -20,10 +20,7 @@ export default function ComingSoonPage() {
         <h1 className="font-display text-white text-4xl md:text-5xl tracking-[0.15em] font-bold mb-2">
           FISHER&rsquo;S OYSTERS
         </h1>
-        <p className="text-white/70 text-xs md:text-sm tracking-[0.3em] uppercase mb-12">
-          Quandamooka Kinyingarra
-        </p>
-        <p className="text-white/80 font-display text-2xl md:text-3xl tracking-wide">
+        <p className="text-white/80 font-display text-2xl md:text-3xl tracking-wide mt-10">
           Coming Soon
         </p>
       </div>
