@@ -17,13 +17,12 @@ export default function ComingSoonPage() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6">
-        <Image
-          src="/images/logo-full.png"
-          alt="Fisher's Oysters"
-          width={280}
-          height={100}
-          className="mx-auto mb-10 brightness-0 invert"
-        />
+        <h1 className="font-display text-white text-4xl md:text-5xl tracking-[0.15em] font-bold mb-2">
+          FISHER&rsquo;S OYSTERS
+        </h1>
+        <p className="text-white/70 text-xs md:text-sm tracking-[0.3em] uppercase mb-12">
+          Quandamooka Kinyingarra
+        </p>
         <p className="text-white/80 font-display text-2xl md:text-3xl tracking-wide">
           Coming Soon
         </p>
