@@ -38,7 +38,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${raleway.variable} ${aleo.variable} min-h-screen bg-background text-foreground font-sans`}>
-        {children}
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

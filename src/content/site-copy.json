@@ -1,0 +1,482 @@
+{
+  "global": {
+    "countryBar": "Quandamooka Country - Minjerribah",
+    "footer": {
+      "acknowledgementLabel": "Acknowledgement of Country:",
+      "acknowledgement": "Fishers Oysters operates on the lands and waters of the Quandamooka people of Minjerribah (North Stradbroke Island) and Moreton Bay. We pay our respects to Elders past, present and emerging, and acknowledge that sovereignty was never ceded.",
+      "tagline": "Oysters from Quandamooka waters",
+      "navigationHeading": "Navigation",
+      "contactHeading": "Contact",
+      "homeLabel": "Home",
+      "copyrightSuffix": "All rights reserved."
+    },
+    "navigation": [
+      {
+        "label": "About Us",
+        "href": "/about"
+      },
+      {
+        "label": "Oyster Tours",
+        "href": "/tours"
+      },
+      {
+        "label": "Oyster Sales",
+        "href": "/sales"
+      },
+      {
+        "label": "Culture, Justice & Jobs",
+        "href": "/culture"
+      },
+      {
+        "label": "Stories",
+        "href": "/stories"
+      },
+      {
+        "label": "Contact",
+        "href": "/contact"
+      }
+    ],
+    "contact": {
+      "email": "fishers.oysters@gmail.com",
+      "phone": "",
+      "address": "Quandamooka Country, North Stradbroke Island (Minjerribah), Moreton Bay, Queensland"
+    }
+  },
+  "home": {
+    "metadataDescription": "Fishers Oysters grows native rock oysters on Quandamooka Country and works the old reef beds around Terangerri, Minjerribah and Moreton Bay.",
+    "hero": {
+      "title": "Oysters grown on Quandamooka Country",
+      "description": "Fishers Oysters grows native rock oysters around Terangerri, Minjerribah and Moreton Bay. The work starts with Quandamooka knowledge, paid work on Country, and care for the old reef beds.",
+      "primaryCta": "Learn More",
+      "secondaryCta": "Contact Us"
+    },
+    "stats": [
+      {
+        "value": "4",
+        "label": "Oyster Leases"
+      },
+      {
+        "value": "1000s",
+        "label": "Oysters Growing"
+      },
+      {
+        "value": "65k+",
+        "label": "Years of Quandamooka Knowledge"
+      },
+      {
+        "value": "1",
+        "label": "Community-Led Enterprise"
+      }
+    ],
+    "offeringsIntro": {
+      "eyebrow": "What We Do",
+      "heading": "Oysters, tours and work on Country",
+      "text": "The leases are working oyster farms. They are also places to teach, employ local people and look after Sea Country in the way Quandamooka families have always known."
+    },
+    "offeringLinkLabel": "Learn more",
+    "offerings": [
+      {
+        "title": "Grow and Supply Oysters",
+        "description": "Native rock oysters grown on working leases in Moreton Bay.",
+        "href": "/sales",
+        "icon": "oyster"
+      },
+      {
+        "title": "Oyster Tours",
+        "description": "Walk the leases, taste oysters, and hear how the work happens on Country.",
+        "href": "/tours",
+        "icon": "compass"
+      },
+      {
+        "title": "Work on Country",
+        "description": "Training and paid work for people who want to learn aquaculture on the leases.",
+        "href": "/culture",
+        "icon": "community"
+      }
+    ],
+    "work": {
+      "eyebrow": "On the leases",
+      "heading": "What the work makes possible",
+      "text": "A good oyster lease produces food, trains workers, brings families onto the water, and gives reef species more structure to live around.",
+      "points": [
+        "Learning on the leases with Elders, family and workers.",
+        "Paid aquaculture work kept close to community.",
+        "Oyster beds that give fish, crabs and other species more habitat."
+      ],
+      "button": "See the work"
+    },
+    "access": {
+      "eyebrow": "Access",
+      "heading": "Moreton Bay leases back in community hands",
+      "text": "Many oyster leases in Moreton Bay remain unused or hard for local communities to access. Fishers Oysters is putting leases back to work for Quandamooka people: growing oysters, teaching the job, and caring for the water at the same time.",
+      "metrics": [
+        {
+          "value": "80%",
+          "label": "of farms locked or unused"
+        },
+        {
+          "value": "20%",
+          "label": "accessible for community use"
+        }
+      ]
+    },
+    "quote": {
+      "text": "The leases have to feed people, employ people, and look after Country.",
+      "attribution": "Shaun Fisher"
+    },
+    "gallery": {
+      "eyebrow": "On Country",
+      "heading": "Oysters, Tours and Restoration in Practice"
+    },
+    "cta": {
+      "heading": "Support Our Oysters, Support Our Community",
+      "text": "For oyster orders, tours, or project enquiries, send us a message.",
+      "button": "Get in Touch"
+    }
+  },
+  "about": {
+    "metadataTitle": "About Us",
+    "metadataDescription": "The story of Fishers Oysters. Shaun Fisher is building an Indigenous-led aquaculture enterprise on Quandamooka country, Moreton Bay.",
+    "hero": {
+      "title": "About Fishers Oysters",
+      "subtitle": "Our story"
+    },
+    "origin": {
+      "heading": "How It Started",
+      "paragraphs": [
+        "Shaun Fisher is a Mununjali, Gorenpul Man who started an oyster enterprise with $500 and four leases in Moreton Bay, off Minjerribah (North Stradbroke Island). No investors, no business plan. Just sea country knowledge, hard work, and a belief that Indigenous people should be leading aquaculture on their own waters.",
+        "Fishers Oysters grows native rock oysters and cares for reef habitat that has long been part of Quandamooka life. Shaun wants the leases to become a cooperative, with more families sharing the work and ownership.",
+        "It is early days. Right now it is Shaun and a growing operation. The next step is bringing more people onto the leases without handing the business to outside investors."
+      ]
+    },
+    "quote": {
+      "text": "Don't start with a business plan. Start with your Elders.",
+      "attribution": "Shaun Fisher"
+    },
+    "principles": {
+      "heading": "Five Principles for Indigenous Aquaculture",
+      "items": [
+        {
+          "number": "01",
+          "title": "Begin with Elders",
+          "description": "The work starts with people who know the tides, the reefs and the stories of this place."
+        },
+        {
+          "number": "02",
+          "title": "Share Ownership",
+          "description": "The goal is a cooperative: more families sharing decisions, work, risk and return."
+        },
+        {
+          "number": "03",
+          "title": "Use Old Knowledge and Science",
+          "description": "Quandamooka knowledge and marine science can sit beside each other on the same lease."
+        },
+        {
+          "number": "04",
+          "title": "Rest Country When It Needs It",
+          "description": "Some seasons call for work. Some call for leaving a lease alone. The business has to read that properly."
+        },
+        {
+          "number": "05",
+          "title": "Keep the Story Local",
+          "description": "The people doing the work should be the people telling the story."
+        }
+      ]
+    },
+    "nextStep": {
+      "heading": "The Next Step",
+      "paragraphs": [
+        "Right now Fishers Oysters is Shaun and the leases. But the enterprise is being built for more families to share ownership and work.",
+        "Shaun wants young people and community members to have a real job to step into. Aquaculture is outdoor, skilled work on Country. It can change what is available to a young person.",
+        "If the cooperative works here, Shaun wants to share the lessons with other coastal Indigenous communities working on their own waters."
+      ]
+    },
+    "profile": {
+      "name": "Shaun Fisher",
+      "role": "Mununjali, Gorenpul Man - Owner Operator",
+      "bio": "Aquaculturist and social enterprise builder. Shaun started Fisher's Oysters to prove that Indigenous communities can lead sustainable marine industries on their own country and create paid work for people who need a start."
+    },
+    "cta": {
+      "heading": "Talk to Us",
+      "text": "For oysters, tours, partnerships, or a conversation about the leases, send a message.",
+      "button": "Contact Us"
+    }
+  },
+  "tours": {
+    "metadataTitle": "Oyster Tours",
+    "metadataDescription": "Experience Quandamooka sea country with Fishers Oysters. Walk the leases, learn about sustainable aquaculture, and taste fresh Moreton Bay oysters.",
+    "hero": {
+      "title": "Oyster Tours",
+      "subtitle": "Walk the leases with Shaun"
+    },
+    "intro": [
+      "Come onto Quandamooka sea country and experience aquaculture guided by the people who have cared for these waters for tens of thousands of years.",
+      "Shaun takes groups out onto the leases in Moreton Bay. You'll see how oysters are grown, hear about the connection between aquaculture and cultural practice, and taste oysters fresh from the water.",
+      "This isn't a polished tourism product. It's a real working operation on Country, shared by the person who built it."
+    ],
+    "expect": {
+      "heading": "What to Expect",
+      "items": [
+        {
+          "title": "Walk the Leases",
+          "description": "Get out onto the oyster leases in Moreton Bay and see how oysters are grown."
+        },
+        {
+          "title": "Quandamooka Culture",
+          "description": "Hear about the cultural connection to sea country and the knowledge behind the aquaculture."
+        },
+        {
+          "title": "Fresh Oyster Tasting",
+          "description": "Taste oysters straight from the water. There's nothing like it."
+        },
+        {
+          "title": "Oyster Farming",
+          "description": "Learn how oyster baskets are checked, moved and cared for through the tide."
+        },
+        {
+          "title": "Small Groups",
+          "description": "Small group sizes. Get in touch to discuss numbers."
+        },
+        {
+          "title": "Getting There",
+          "description": "Minjerribah (North Stradbroke Island), accessible by ferry from Brisbane. (Logistics TBC)"
+        }
+      ]
+    },
+    "quote": {
+      "text": "The sea country has been waiting for us to come home.",
+      "attribution": "Shaun Fisher"
+    },
+    "cta": {
+      "heading": "Book a Tour",
+      "text": "Interested in visiting? Get in touch to arrange a tour for your group, school, or organisation.",
+      "button": "Enquire Now"
+    }
+  },
+  "sales": {
+    "metadataTitle": "Oyster Sales",
+    "metadataDescription": "Native rock oysters from Moreton Bay. Wholesale enquiries and direct retail coming soon from Fishers Oysters.",
+    "hero": {
+      "title": "Oyster Sales",
+      "subtitle": "Native rock oysters from Moreton Bay"
+    },
+    "intro": [
+      "Our oysters are grown in the tidal flows of Moreton Bay on Quandamooka sea country. Every dozen supports Indigenous-led aquaculture and reef restoration.",
+      "Grown slowly in Moreton Bay, they develop a complex mineral flavour from the clean tidal water around the leases."
+    ],
+    "ordering": {
+      "heading": "Ordering",
+      "cards": [
+        {
+          "title": "Wholesale",
+          "price": "$16",
+          "unit": "/dozen",
+          "points": [
+            "Restaurants, cafes & retailers",
+            "Regular supply arrangements",
+            "Moreton Bay delivery available"
+          ],
+          "button": "Wholesale Enquiry"
+        },
+        {
+          "title": "Direct Retail",
+          "price": "$24",
+          "unit": "/dozen",
+          "badge": "Coming Soon",
+          "description": "Direct sales and a shopfront are on the way so you can buy straight from the source. Watch this space.",
+          "button": "Register Interest"
+        }
+      ]
+    },
+    "quote": {
+      "text": "The oyster has to taste good, and the work behind it has to be honest.",
+      "attribution": "Shaun Fisher"
+    },
+    "cta": {
+      "heading": "Order Our Oysters",
+      "text": "Looking for oysters for your restaurant, event, or market? Get in touch.",
+      "button": "Contact Us"
+    }
+  },
+  "culture": {
+    "metadataTitle": "Culture, Justice & Jobs",
+    "metadataDescription": "Fishers Oysters creates paid aquaculture work on Quandamooka country.",
+    "hero": {
+      "title": "Culture, Justice & Jobs",
+      "subtitle": "Work, leases and Country"
+    },
+    "problem": {
+      "heading": "The Problem",
+      "paragraphs": [
+        "Eighty percent of oyster leases in Queensland are locked by corporate interests. Indigenous communities, the original custodians of these waters, are largely shut out of the aquaculture industry despite tens of thousands of years of sustainable marine management.",
+        "At the same time, marginalised young people and community members in Indigenous communities need more ways into paid work, especially work tied to Country and culture.",
+        "Fishers Oysters exists to address both problems at once."
+      ]
+    },
+    "jobs": {
+      "heading": "Jobs on the Leases",
+      "paragraphs": [
+        "Aquaculture is physical, outdoor, skilled work on country. It's the kind of work that can open a door for young people who have not found steady employment elsewhere.",
+        "Shaun is building Fishers Oysters so people can learn a trade, earn money and work outside on Country. The business has to sell good oysters and look after the lease at the same time.",
+        "As the enterprise grows into a cooperative, the goal is for workers to become owners, sharing in the decisions, the risk, and the returns."
+      ]
+    },
+    "quote": {
+      "text": "Old knowledge and new tools both have a place on the lease.",
+      "attribution": "Shaun Fisher"
+    },
+    "environment": {
+      "heading": "Environmental Leadership",
+      "intro": "Looking after country isn't separate from the business. It is the business. Fishers Oysters takes an Elder-guided approach to environmental management:",
+      "points": [
+        "Resting leases when Country needs it, even when regulations do not require it.",
+        "Using oyster farming to rebuild reef habitat for fish, crabs and other marine life.",
+        "Reading Country the way Quandamooka people always have, alongside modern monitoring methods."
+      ]
+    },
+    "sharing": {
+      "heading": "Sharing What Works",
+      "paragraphs": [
+        "Fishers Oysters is one business on one stretch of water. If the cooperative works here, Shaun wants other coastal Indigenous communities to be able to use what he has learned.",
+        "If you're from a coastal Indigenous community interested in aquaculture, or an organisation that supports Indigenous enterprise, Shaun wants to hear from you."
+      ]
+    },
+    "cta": {
+      "heading": "Talk to Shaun",
+      "text": "For partnership, work or aquaculture questions, send a message.",
+      "button": "Contact Us"
+    }
+  },
+  "stories": {
+    "metadataTitle": "Stories",
+    "metadataDescription": "Community voices and stories from Fishers Oysters",
+    "hero": {
+      "title": "Field Notes",
+      "text": "Stories from people working on, visiting and learning from Country."
+    },
+    "featuredStory": {
+      "id": "featured-1",
+      "title": "Between Waters and Worlds: A Day on Quandamooka Country",
+      "excerpt": "A day with Shaun Fisher on Quandamooka sea country: oyster leases, cultural knowledge and the work of building a business on Country.",
+      "coverImage": "/images/walking-to-boat.jpg",
+      "storyteller": "Benjamin Knight",
+      "url": "/stories/between-waters-and-worlds",
+      "publishedAt": "2025-03-25",
+      "tags": [
+        "culture",
+        "country",
+        "aquaculture"
+      ]
+    },
+    "credit": {
+      "prefix": "Stories ethically captured and shared through",
+      "linkLabel": "Empathy Ledger",
+      "suffix": "shared with consent"
+    }
+  },
+  "storyDetail": {
+    "metadataTitle": "Between Waters and Worlds: A Day on Quandamooka Country",
+    "metadataDescription": "A day with Shaun Fisher on Quandamooka sea country, walking the oyster leases and learning how the work is done.",
+    "date": "25 March 2025",
+    "title": "Between Waters and Worlds: A Day on Quandamooka Country",
+    "lead": "At 6:30am we board the Stradbroke Flyer for Minjerribah. The day starts early because the tide decides when the leases can be worked.",
+    "sections": [
+      {
+        "heading": "The Caretaker",
+        "paragraphs": [
+          "Shaun Fisher welcomes us with the warmth that comes from deep belonging. While he briefly leaves to take his twins to school, we sit in the quiet of Minjerribah and reflect on what this place holds: layers of conversation with Elders and community members, accumulated over visits.",
+          "When Shaun returns, he shows us a clearing near his oyster lease. He talks about boat sheds, training space and places where community can gather before and after work on the water."
+        ]
+      },
+      {
+        "heading": "History's Shadows",
+        "paragraphs": [
+          "Driving across the island, Shaun describes Elders directing the creation of skeleton effigies to protect sacred sites threatened by a proposed whale research centre. He talks about disease, sand mining, sacred sites and the pressure that comes when visitors treat the island as a playground."
+        ]
+      },
+      {
+        "heading": "Waters of Continuity",
+        "paragraphs": [
+          "We pause at a natural stream Shaun has visited for decades and now shares with his children. It is a place to cool down, gather food and remember who has been here before."
+        ]
+      },
+      {
+        "heading": "On the Lease",
+        "paragraphs": [
+          "On the farm, Shaun shows how the baskets are handled and checked. The work is practical: lifting, sorting, watching the tide and knowing when to leave the lease alone.",
+          "We taste oysters after the work. The conversation stays close to the water: family, leases, food, Elders and what the business needs next."
+        ]
+      },
+      {
+        "heading": "Walking Together",
+        "paragraphs": [
+          "As the day ends, Shaun supports an Elder as they walk back to the boat. It is a small moment, but it says a lot about the way this work is held."
+        ]
+      },
+      {
+        "heading": "Reflection",
+        "paragraphs": [
+          "On the ferry home, questions surface. Does our storytelling matter? Do our efforts to witness and reflect make any real difference?",
+          "Showing up again, listening properly and doing useful tasks may matter before any large plan. The work starts there."
+        ]
+      }
+    ],
+    "imageCaption": "The oyster leases from above, Moreton Bay, Quandamooka Country",
+    "quote": "The farm gives people work, food and a place to teach.",
+    "backLink": "Back to Stories"
+  },
+  "contact": {
+    "metadataTitle": "Contact",
+    "metadataDescription": "Contact Fishers Oysters for wholesale orders, tour bookings, partnerships and general enquiries.",
+    "hero": {
+      "title": "Get in Touch",
+      "subtitle": "We'd love to hear from you"
+    },
+    "infoHeading": "Contact Information",
+    "labels": {
+      "email": "Email",
+      "phone": "Phone",
+      "location": "Location"
+    },
+    "expect": {
+      "heading": "What to expect",
+      "text": "We'll get back to you within a few business days. For wholesale orders, please include your venue name and estimated volume. For tour enquiries, let us know your preferred dates and group size."
+    },
+    "form": {
+      "successHeading": "Message Sent!",
+      "successText": "Thanks for reaching out. We'll get back to you soon.",
+      "sendAnother": "Send another message",
+      "error": "Something went wrong. Please try again.",
+      "nameLabel": "Name *",
+      "emailLabel": "Email *",
+      "phoneLabel": "Phone",
+      "inquiryTypeLabel": "Inquiry Type",
+      "selectPlaceholder": "Select an option...",
+      "options": [
+        {
+          "value": "general",
+          "label": "General Inquiry"
+        },
+        {
+          "value": "wholesale",
+          "label": "Wholesale Orders"
+        },
+        {
+          "value": "tours",
+          "label": "Tours"
+        },
+        {
+          "value": "partnership",
+          "label": "Partnership"
+        },
+        {
+          "value": "media",
+          "label": "Media"
+        }
+      ],
+      "messageLabel": "Message *",
+      "sending": "Sending...",
+      "submit": "Send Message"
+    }
+  }
+}

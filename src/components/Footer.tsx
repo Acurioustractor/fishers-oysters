@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import config from '../../project.config.json';
+import copy from '@/content/site-copy.json';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,10 +12,8 @@ export default function Footer() {
       <div className="bg-gray-800 py-6">
         <div className="container">
           <p className="text-sm text-gray-400 max-w-3xl">
-            <strong className="text-gray-300">Acknowledgement of Country:</strong>{' '}
-            Fishers Oysters operates on the lands and waters of the Quandamooka people of
-            Minjerribah (North Stradbroke Island) and Moreton Bay. We pay our respects to
-            Elders past, present and emerging, and acknowledge that sovereignty was never ceded.
+            <strong className="text-gray-300">{copy.global.footer.acknowledgementLabel}</strong>{' '}
+            {copy.global.footer.acknowledgement}
           </p>
         </div>
       </div>
@@ -23,25 +22,25 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <Image src="/images/logo-full.png" alt={config.name} width={220} height={100} className="mb-4" />
+            <Image src="/images/logo-full.png" alt={config.name} width={220} height={100} className="mb-4 h-auto w-auto" />
             <p className="text-sm text-gray-400">
-              {config.tagline}
+              {copy.global.footer.tagline}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="font-medium text-white mb-4">Navigation</h4>
+            <h4 className="font-medium text-white mb-4">{copy.global.footer.navigationHeading}</h4>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/"
                   className="text-sm text-gray-400 hover:text-white transition-colors"
                 >
-                  Home
+                  {copy.global.footer.homeLabel}
                 </Link>
               </li>
-              {config.navigation.map((item) => (
+              {copy.global.navigation.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -56,31 +55,31 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-medium text-white mb-4">Contact</h4>
+            <h4 className="font-medium text-white mb-4">{copy.global.footer.contactHeading}</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              {config.contact?.email && (
+              {copy.global.contact.email && (
                 <li>
                   <a
-                    href={`mailto:${config.contact.email}`}
+                    href={`mailto:${copy.global.contact.email}`}
                     className="hover:text-white transition-colors"
                   >
-                    {config.contact.email}
+                    {copy.global.contact.email}
                   </a>
                 </li>
               )}
-              {config.contact?.phone && (
+              {copy.global.contact.phone && (
                 <li>
                   <a
-                    href={`tel:${config.contact.phone}`}
+                    href={`tel:${copy.global.contact.phone}`}
                     className="hover:text-white transition-colors"
                   >
-                    {config.contact.phone}
+                    {copy.global.contact.phone}
                   </a>
                 </li>
               )}
-              {config.contact?.address && (
+              {copy.global.contact.address && (
                 <li className="text-gray-500">
-                  {config.contact.address}
+                  {copy.global.contact.address}
                 </li>
               )}
             </ul>
@@ -89,7 +88,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-gray-500 text-center">
-          <p>&copy; {currentYear} {config.name}. All rights reserved.</p>
+          <p>&copy; {currentYear} {config.name}. {copy.global.footer.copyrightSuffix}</p>
         </div>
       </div>
     </footer>

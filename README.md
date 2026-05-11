@@ -22,6 +22,9 @@ Indigenous-led aquaculture enterprise combining ecological restoration with econ
    ```
 
 3. Edit `.env.local` with your API keys:
+   - `OWNER_USERNAME` - optional username for the `/owner` copy editor
+   - `OWNER_PASSWORD` - password for the `/owner` copy editor
+   - `OWNER_SESSION_SECRET` - optional secret for owner login cookies
    - `GHL_API_KEY` - GoHighLevel API key (optional, for contact form)
    - `GHL_LOCATION_ID` - GoHighLevel location ID
    - `NOTION_TOKEN` - Notion integration token (optional)
@@ -51,13 +54,33 @@ Indigenous-led aquaculture enterprise combining ecological restoration with econ
 
 ## Configuration
 
-Edit `project.config.json` to customize:
+Website copy is stored in `src/content/site-copy.json` and can be edited at `/owner`.
+
+For local development, `/owner` uses the fallback password `fishers-oysters` if `OWNER_PASSWORD` is not set. Production requires `OWNER_PASSWORD`. Set `OWNER_USERNAME` as well if you want a named shared editor account instead of password-only login.
+
+To make production saves trigger a redeploy, connect the site to GitHub/Vercel and set:
+
+- `OWNER_PASSWORD`: the password Shaun uses at `/owner`
+- `OWNER_USERNAME`: optional username for the shared editor account
+- `OWNER_SESSION_SECRET`: a long random string used to sign the login cookie
+- `GITHUB_TOKEN`: a fine-grained GitHub token with contents read/write access to this repo
+- `GITHUB_REPOSITORY=Acurioustractor/fishers-oysters`
+- `GITHUB_BRANCH=main`
+- `VERCEL_DEPLOY_HOOK_URL`: optional, only needed if the GitHub commit does not trigger Vercel automatically
+
+Remote edit flow:
+
+1. Shaun opens the deployed site URL on his computer.
+2. He goes to `/owner`.
+3. He signs in with the shared editor account details.
+4. He edits copy and presses **Publish changes**.
+5. The site commits `src/content/site-copy.json` to GitHub.
+6. Vercel rebuilds and the deployed website updates after the deployment finishes.
+
+Edit `project.config.json` only for low-level site settings:
 
 - Site name, tagline, and description
-- Page content (hero, about, CTA, stories sections)
-- Navigation links
 - Social media links
-- Contact information
 - Integration settings
 - Ecosystem attribution (optional)
 

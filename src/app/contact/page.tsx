@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 import ContactForm from '@/components/ContactForm';
 import Hero from '@/components/Hero';
-import config from '../../../project.config.json';
+import copy from '@/content/site-copy.json';
 
 export const metadata: Metadata = {
-  title: 'Contact',
-  description: 'Get in touch with Fishers Oysters — wholesale orders, tour bookings, partnerships, and general enquiries.',
+  title: copy.contact.metadataTitle,
+  description: copy.contact.metadataDescription,
 };
 
 export default function ContactPage() {
   return (
     <>
       <Hero
-        title="Get in Touch"
-        subtitle="We'd love to hear from you"
+        title={copy.contact.hero.title}
+        subtitle={copy.contact.hero.subtitle}
         variant="page"
       />
 
@@ -29,48 +29,43 @@ export default function ContactPage() {
             {/* Contact Info */}
             <div>
               <h2 className="text-2xl font-display font-bold text-primary mb-6">
-                Contact Information
+                {copy.contact.infoHeading}
               </h2>
 
-              {config.contact?.email && (
+              {copy.global.contact.email && (
                 <div className="mb-6">
-                  <h3 className="font-medium text-gray-900 mb-1">Email</h3>
+                  <h3 className="font-medium text-gray-900 mb-1">{copy.contact.labels.email}</h3>
                   <a
-                    href={`mailto:${config.contact.email}`}
+                    href={`mailto:${copy.global.contact.email}`}
                     className="text-primary hover:underline"
                   >
-                    {config.contact.email}
+                    {copy.global.contact.email}
                   </a>
                 </div>
               )}
 
-              {config.contact?.phone && (
+              {copy.global.contact.phone && (
                 <div className="mb-6">
-                  <h3 className="font-medium text-gray-900 mb-1">Phone</h3>
-                  <a
-                    href={`tel:${config.contact.phone}`}
-                    className="text-primary hover:underline"
-                  >
-                    {config.contact.phone}
+                  <h3 className="font-medium text-gray-900 mb-1">{copy.contact.labels.phone}</h3>
+                  <a href={`tel:${copy.global.contact.phone}`} className="text-primary hover:underline">
+                    {copy.global.contact.phone}
                   </a>
                 </div>
               )}
 
-              {config.contact?.address && (
+              {copy.global.contact.address && (
                 <div className="mb-6">
-                  <h3 className="font-medium text-gray-900 mb-1">Location</h3>
-                  <p className="text-gray-600">{config.contact.address}</p>
+                  <h3 className="font-medium text-gray-900 mb-1">{copy.contact.labels.location}</h3>
+                  <p className="text-gray-600">{copy.global.contact.address}</p>
                 </div>
               )}
 
               <div className="mt-8 bg-gray-50 rounded-xl p-6">
                 <h3 className="font-display font-bold text-foreground mb-2">
-                  What to expect
+                  {copy.contact.expect.heading}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
-                  We'll get back to you within a few business days. For wholesale
-                  orders, please include your venue name and estimated volume.
-                  For tour enquiries, let us know your preferred dates and group size.
+                  {copy.contact.expect.text}
                 </p>
               </div>
             </div>

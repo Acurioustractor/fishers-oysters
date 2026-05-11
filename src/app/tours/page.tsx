@@ -2,18 +2,19 @@ import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import QuoteBlock from '@/components/QuoteBlock';
 import Gallery from '@/components/Gallery';
+import copy from '@/content/site-copy.json';
 
 export const metadata: Metadata = {
-  title: 'Oyster Tours',
-  description: 'Experience Quandamooka sea country with Fishers Oysters. Walk the leases, learn about sustainable aquaculture, and taste fresh Moreton Bay oysters.',
+  title: copy.tours.metadataTitle,
+  description: copy.tours.metadataDescription,
 };
 
 export default function ToursPage() {
   return (
     <>
       <Hero
-        title="Oyster Tours"
-        subtitle="Experience our sea country"
+        title={copy.tours.hero.title}
+        subtitle={copy.tours.hero.subtitle}
         variant="page"
       />
 
@@ -22,21 +23,11 @@ export default function ToursPage() {
         <div className="container">
           <div className="max-w-3xl mx-auto prose prose-lg">
             <p className="lead text-xl text-gray-600">
-              Come onto Quandamooka sea country and experience aquaculture guided
-              by the people who have cared for these waters for tens of thousands
-              of years.
+              {copy.tours.intro[0]}
             </p>
-            <p>
-              Shaun takes groups out onto the leases in Moreton Bay. You'll see
-              how oysters are grown, hear about the connection between
-              aquaculture and cultural practice, and taste oysters fresh from the
-              water.
-            </p>
-            <p>
-              This isn't a polished tourism product. It's a real working operation
-              on real country, shared by the person who built it. You'll leave
-              understanding why Indigenous-led aquaculture matters.
-            </p>
+            {copy.tours.intro.slice(1).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -45,36 +36,11 @@ export default function ToursPage() {
       <section className="section bg-white">
         <div className="container">
           <h2 className="section-heading text-center text-primary mb-12">
-            What to Expect
+            {copy.tours.expect.heading}
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                title: 'Walk the Leases',
-                description: 'Get out onto the oyster leases in Moreton Bay and see how oysters are grown.',
-              },
-              {
-                title: 'Quandamooka Culture',
-                description: 'Hear about the cultural connection to sea country and the knowledge behind the aquaculture.',
-              },
-              {
-                title: 'Fresh Oyster Tasting',
-                description: 'Taste oysters straight from the water. There\'s nothing like it.',
-              },
-              {
-                title: 'Sustainable Aquaculture',
-                description: 'Learn how oyster farming restores reef ecosystems and supports marine biodiversity.',
-              },
-              {
-                title: 'Small Groups',
-                description: 'Intimate group sizes for a personal experience. (Group size TBC — get in touch to discuss)',
-              },
-              {
-                title: 'Getting There',
-                description: 'Minjerribah (North Stradbroke Island), accessible by ferry from Brisbane. (Logistics TBC)',
-              },
-            ].map((item, i) => (
-              <div key={i} className="bg-gray-50 rounded-xl p-6">
+            {copy.tours.expect.items.map((item) => (
+              <div key={item.title} className="bg-gray-50 rounded-xl p-6">
                 <h3 className="font-display text-lg font-bold text-foreground mb-2">
                   {item.title}
                 </h3>
@@ -106,8 +72,8 @@ export default function ToursPage() {
       <section className="section bg-white">
         <div className="container">
           <QuoteBlock
-            quote="The sea country has been waiting for us to come home."
-            attribution="Shaun Fisher"
+            quote={copy.tours.quote.text}
+            attribution={copy.tours.quote.attribution}
           />
         </div>
       </section>
@@ -116,14 +82,13 @@ export default function ToursPage() {
       <section className="section bg-primary text-white">
         <div className="container text-center">
           <h2 className="text-3xl font-display font-bold mb-4">
-            Book a Tour
+            {copy.tours.cta.heading}
           </h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-            Interested in visiting? Get in touch to arrange a tour for your
-            group, school, or organisation.
+            {copy.tours.cta.text}
           </p>
           <a href="/contact" className="btn bg-white text-primary hover:bg-gray-100">
-            Enquire Now
+            {copy.tours.cta.button}
           </a>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import copy from '@/content/site-copy.json';
 import { getIcon } from './Icons';
 
 interface OfferingCardProps {
@@ -21,7 +22,7 @@ export default function OfferingCard({ title, description, href, icon }: Offerin
         {description}
       </p>
       <span className="text-primary font-medium group-hover:underline">
-        Learn more &rarr;
+        {copy.home.offeringLinkLabel} &rarr;
       </span>
     </Link>
   );

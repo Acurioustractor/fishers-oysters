@@ -1,23 +1,22 @@
 import type { Metadata } from 'next';
 import StoryCard from '@/components/StoryCard';
-import { getStories } from '@/lib/empathy-ledger';
 import type { Story } from '@/lib/empathy-ledger';
-import config from '../../../project.config.json';
+import copy from '@/content/site-copy.json';
 
 export const metadata: Metadata = {
-  title: 'Stories',
-  description: `Community voices and stories from ${config.name}`,
+  title: copy.stories.metadataTitle,
+  description: copy.stories.metadataDescription,
 };
 
 const featuredStory: Story = {
-  id: 'featured-1',
-  title: 'Between Waters and Worlds: A Day on Quandamooka Country',
-  excerpt: 'A reflective account of a day spent with Shaun Fisher on Quandamooka sea country — oyster leases, cultural knowledge, and the quiet work of building something that matters.',
-  coverImage: '/images/walking-to-boat.jpg',
-  storyteller: 'Benjamin Knight',
-  url: '/stories/between-waters-and-worlds',
-  publishedAt: '2025-03-25',
-  tags: ['culture', 'country', 'aquaculture'],
+  id: copy.stories.featuredStory.id,
+  title: copy.stories.featuredStory.title,
+  excerpt: copy.stories.featuredStory.excerpt,
+  coverImage: copy.stories.featuredStory.coverImage,
+  storyteller: copy.stories.featuredStory.storyteller,
+  url: copy.stories.featuredStory.url,
+  publishedAt: copy.stories.featuredStory.publishedAt,
+  tags: copy.stories.featuredStory.tags,
 };
 
 export default async function StoriesPage() {
@@ -32,11 +31,10 @@ export default async function StoriesPage() {
         <div className="container">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              Community Voices
+              {copy.stories.hero.title}
             </h1>
             <p className="text-xl opacity-90">
-              Real stories from the people at the heart of our work.
-              Every voice matters, every story shapes our journey.
+              {copy.stories.hero.text}
             </p>
           </div>
         </div>
@@ -57,16 +55,16 @@ export default async function StoriesPage() {
       <section className="py-8 bg-gray-50 border-t">
         <div className="container text-center">
           <p className="text-sm text-gray-500">
-            Stories ethically captured and shared through{' '}
+            {copy.stories.credit.prefix}{' '}
             <a
               href="https://empathy-ledger-v2.vercel.app"
               className="text-primary hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Empathy Ledger
+              {copy.stories.credit.linkLabel}
             </a>{' '}
-            - consent-first storytelling
+            - {copy.stories.credit.suffix}
           </p>
         </div>
       </section>

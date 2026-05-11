@@ -2,58 +2,58 @@
   "projectCode": "ACT-FO",
   "name": "Fishers Oysters",
   "slug": "fishers-oysters",
-  "tagline": "Restoring oyster reefs, restoring sovereignty",
-  "description": "Indigenous-led aquaculture on Quandamooka country. Shaun Fisher is building an oyster enterprise in Moreton Bay, growing premium oysters, restoring reef ecosystems, and creating jobs for community.",
+  "tagline": "Oysters from Quandamooka waters",
+  "description": "Fishers Oysters is a First Nations oyster business on Quandamooka Country, growing native rock oysters and caring for old reef beds around Terangerri, Minjerribah and Moreton Bay.",
   "theme": "earth",
   "content": {
     "hero": {
-      "heading": "Restoring oyster reefs, restoring sovereignty",
-      "subheading": "Indigenous-led aquaculture on Quandamooka country, Moreton Bay",
+      "heading": "Oysters grown on Quandamooka Country",
+      "subheading": "Native rock oysters from Terangerri, Minjerribah and Moreton Bay",
       "cta": { "label": "Get in Touch", "href": "/contact" }
     },
     "about": {
-      "intro": "Fishers Oysters is an Indigenous-led aquaculture enterprise on Quandamooka country, combining ecological restoration with economic sovereignty on Moreton Bay.",
-      "mission": "To restore Moreton Bay's oyster reefs while building economic sovereignty for the next generation of Indigenous aquaculturists.",
+      "intro": "Fishers Oysters is a First Nations oyster business working on Quandamooka Country.",
+      "mission": "To grow native rock oysters, care for old reef beds, and bring more local families into paid aquaculture work.",
       "values": [
-        { "title": "Country First", "description": "Caring for sea country through sustainable aquaculture that restores reef ecosystems." },
-        { "title": "Community Grown", "description": "Built by community, for community. Every oyster supports Indigenous enterprise." },
-        { "title": "Quality Driven", "description": "Premium oysters grown in the pristine waters of Moreton Bay." },
-        { "title": "Knowledge Sharing", "description": "Passing on traditional knowledge and building pathways for the next generation." }
+        { "title": "Country First", "description": "Working the leases in ways that keep Sea Country healthy." },
+        { "title": "Community Grown", "description": "Keeping ownership and work close to the families connected to these waters." },
+        { "title": "Quality Driven", "description": "Native rock oysters grown in the clean tidal water of Moreton Bay." },
+        { "title": "Knowledge Sharing", "description": "Teaching the work on the leases, with Elders and marine science both in the conversation." }
       ]
     },
     "stats": [
       { "value": "4", "label": "Oyster Leases" },
       { "value": "1000s", "label": "Oysters Growing" },
-      { "value": "1", "label": "Family, Growing" },
-      { "value": "60k+", "label": "Years of Sea Country Knowledge" }
+      { "value": "65k+", "label": "Years of Quandamooka Knowledge" },
+      { "value": "1", "label": "Community-Led Enterprise" }
     ],
     "offerings": [
       {
-        "title": "Premium Oysters",
-        "description": "Premium oysters sustainably grown in the pristine waters of Moreton Bay. Wholesale and direct sales.",
+        "title": "Grow and Supply Oysters",
+        "description": "Native rock oysters grown on working leases in Moreton Bay.",
         "href": "/sales",
         "icon": "oyster"
       },
       {
         "title": "Oyster Tours",
-        "description": "Walk our leases, taste fresh oysters, and experience Quandamooka sea country with the people who know it best.",
+        "description": "Walk the leases, taste oysters, and hear how the work happens on Country.",
         "href": "/tours",
         "icon": "compass"
       },
       {
-        "title": "Culture, Justice & Jobs",
-        "description": "Creating pathways for marginalised young people and community through aquaculture.",
+        "title": "Work on Country",
+        "description": "Training and paid work for people who want to learn aquaculture on the leases.",
         "href": "/culture",
         "icon": "community"
       }
     ],
     "quote": {
-      "text": "The real story is that we're proving Indigenous communities can lead sustainable marine management while building economic independence.",
+      "text": "The leases have to feed people, employ people, and look after Country.",
       "attribution": "Shaun Fisher"
     },
     "cta": {
-      "heading": "The Sea Country Has Been Waiting",
-      "text": "Whether you want to order oysters, book a tour, or support Indigenous-led aquaculture — we'd love to hear from you.",
+      "heading": "Support Our Oysters, Support Our Community",
+      "text": "For oyster orders, tours, or project enquiries, send us a message.",
       "button": { "label": "Contact Us", "href": "/contact" }
     },
     "stories": {

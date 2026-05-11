@@ -36,6 +36,7 @@ next-env.d.ts
 
 # Content (synced from Empathy Ledger)
 /src/content/*.json
+!/src/content/site-copy.json
 
 # Tool caches
 .claude/

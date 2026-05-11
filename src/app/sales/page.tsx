@@ -2,18 +2,23 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Hero from '@/components/Hero';
 import QuoteBlock from '@/components/QuoteBlock';
+import copy from '@/content/site-copy.json';
 
 export const metadata: Metadata = {
-  title: 'Oyster Sales',
-  description: 'Premium oysters from Moreton Bay. Wholesale enquiries and direct retail coming soon from Fishers Oysters.',
+  title: copy.sales.metadataTitle,
+  description: copy.sales.metadataDescription,
 };
 
 export default function SalesPage() {
+  const wholesale = copy.sales.ordering.cards[0];
+  const retail = copy.sales.ordering.cards[1];
+  const wholesalePoints = wholesale?.points ?? [];
+
   return (
     <>
       <Hero
-        title="Oyster Sales"
-        subtitle="Moreton Bay's finest oysters"
+        title={copy.sales.hero.title}
+        subtitle={copy.sales.hero.subtitle}
         variant="page"
       />
 
@@ -22,15 +27,11 @@ export default function SalesPage() {
         <div className="container">
           <div className="max-w-3xl mx-auto prose prose-lg">
             <p className="lead text-xl text-gray-600">
-              Our oysters are grown in the tidal flows of Moreton Bay on
-              Quandamooka sea country. Every dozen supports Indigenous-led
-              aquaculture and reef restoration.
+              {copy.sales.intro[0]}
             </p>
-            <p>
-              Grown slowly in Moreton Bay, they develop a complex mineral
-              flavour that reflects the character of these waters. Premium
-              quality from pristine sea country.
-            </p>
+            {copy.sales.intro.slice(1).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </div>
       </section>
@@ -40,55 +41,50 @@ export default function SalesPage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <h2 className="section-heading text-center text-primary mb-12">
-              Ordering
+              {copy.sales.ordering.heading}
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
               {/* Wholesale */}
               <div className="bg-gray-50 rounded-2xl p-8">
                 <h3 className="font-display text-2xl font-bold text-foreground mb-2">
-                  Wholesale
+                  {wholesale.title}
                 </h3>
                 <p className="text-3xl font-display font-bold text-primary mb-4">
-                  $16<span className="text-lg text-gray-500">/dozen</span>
+                  {wholesale.price}
+                  <span className="text-lg text-gray-500">{wholesale.unit}</span>
                 </p>
                 <ul className="space-y-3 text-gray-600 mb-6">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">&#x2713;</span>
-                    Restaurants, cafes &amp; retailers
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">&#x2713;</span>
-                    Regular supply arrangements
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">&#x2713;</span>
-                    Moreton Bay delivery available
-                  </li>
+                  {wholesalePoints.map((point) => (
+                    <li key={point} className="flex items-start gap-2">
+                      <span className="text-primary mt-1">&#x2713;</span>
+                      {point}
+                    </li>
+                  ))}
                 </ul>
                 <a href="/contact" className="btn-primary w-full text-center">
-                  Wholesale Enquiry
+                  {wholesale.button}
                 </a>
               </div>
 
               {/* Direct / Retail */}
               <div className="bg-gray-50 rounded-2xl p-8 border-2 border-dashed border-accent">
                 <h3 className="font-display text-2xl font-bold text-foreground mb-2">
-                  Direct Retail
+                  {retail.title}
                 </h3>
                 <p className="text-3xl font-display font-bold text-accent mb-4">
-                  $24<span className="text-lg text-gray-500">/dozen</span>
+                  {retail.price}
+                  <span className="text-lg text-gray-500">{retail.unit}</span>
                 </p>
                 <div className="bg-accent/10 rounded-lg p-4 mb-6">
                   <p className="text-sm font-medium text-secondary">
-                    Coming Soon
+                    {retail.badge}
                   </p>
                   <p className="text-sm text-gray-600 mt-1">
-                    Direct sales and a shopfront are on the way so you can buy
-                    straight from the source. Watch this space.
+                    {retail.description}
                   </p>
                 </div>
                 <a href="/contact" className="btn-outline w-full text-center">
-                  Register Interest
+                  {retail.button}
                 </a>
               </div>
             </div>
@@ -111,8 +107,8 @@ export default function SalesPage() {
       <section className="section">
         <div className="container">
           <QuoteBlock
-            quote="We're not just selling oysters. We're building an Indigenous brand that represents quality, country and community."
-            attribution="Shaun Fisher"
+            quote={copy.sales.quote.text}
+            attribution={copy.sales.quote.attribution}
           />
         </div>
       </section>
@@ -121,14 +117,13 @@ export default function SalesPage() {
       <section className="section bg-primary text-white">
         <div className="container text-center">
           <h2 className="text-3xl font-display font-bold mb-4">
-            Order Our Oysters
+            {copy.sales.cta.heading}
           </h2>
           <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-            Looking for premium oysters for your restaurant, event,
-            or market? Get in touch.
+            {copy.sales.cta.text}
           </p>
           <a href="/contact" className="btn bg-white text-primary hover:bg-gray-100">
-            Contact Us
+            {copy.sales.cta.button}
           </a>
         </div>
       </section>

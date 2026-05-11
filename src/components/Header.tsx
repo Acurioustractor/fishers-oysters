@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import config from '../../project.config.json';
+import copy from '@/content/site-copy.json';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -12,21 +13,21 @@ export default function Header() {
     <>
       {/* Country acknowledgement bar */}
       <div className="bg-foreground text-white/80 text-xs text-center py-1.5">
-        Quandamooka Country &middot; Minjerribah
+        {copy.global.countryBar}
       </div>
 
       <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
         <div className="container">
           <nav className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-1">
-              <Image src="/images/logo-icon.png" alt="" width={80} height={64} className="-my-3" />
-              <span className="font-display text-xl font-bold text-primary">{config.name}</span>
+            <Link href="/" className="flex min-w-0 items-center gap-1">
+              <Image src="/images/logo-icon.png" alt="" width={80} height={64} className="-my-3 h-16 w-20 shrink-0" priority />
+              <span className="truncate font-display text-lg font-bold text-primary sm:text-xl">{config.name}</span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6">
-              {config.navigation.map((item) =>
+            <div className="hidden lg:flex items-center gap-5 xl:gap-6">
+              {copy.global.navigation.map((item) =>
                 item.href === '/contact' ? (
                   <Link
                     key={item.href}
@@ -49,9 +50,12 @@ export default function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              type="button"
+              className="p-2 lg:hidden"
+              onClick={() => setMobileMenuOpen((open) => !open)}
               aria-label="Toggle menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               <svg
                 className="w-6 h-6 text-gray-600"
@@ -80,8 +84,8 @@ export default function Header() {
 
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
-            <div className="md:hidden py-4 border-t">
-              {config.navigation.map((item) => (
+            <div id="mobile-navigation" className="border-t py-4 lg:hidden">
+              {copy.global.navigation.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
