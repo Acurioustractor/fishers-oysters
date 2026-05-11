@@ -1,11 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { PublishingStatus } from '@/lib/owner-copy-store';
+import type { CopyJsonObject as JsonObject, CopyJsonValue as JsonValue, PublishingStatus } from '@/lib/owner-copy-store';
 
-type JsonPrimitive = string | number | boolean | null | undefined;
-type JsonValue = JsonPrimitive | JsonObject | JsonValue[];
-type JsonObject = { [key: string]: JsonValue };
 type PathPart = string | number;
 
 type SaveResponse = {

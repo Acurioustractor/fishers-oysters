@@ -1,14 +1,13 @@
 import type { Metadata } from 'next';
 import OwnerCopyEditor from '@/components/owner/OwnerCopyEditor';
 import OwnerLogin from '@/components/owner/OwnerLogin';
-import copy from '@/content/site-copy.json';
 import {
   hasOwnerSession,
   isOwnerLoginConfigured,
   isOwnerUsernameRequired,
   isUsingLocalDefaultPassword,
 } from '@/lib/owner-auth';
-import { getPublishingStatus } from '@/lib/owner-copy-store';
+import { getPublishingStatus, readCopyObject } from '@/lib/owner-copy-store';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,12 +21,13 @@ export const metadata: Metadata = {
 
 export default async function OwnerPage() {
   const isSignedIn = await hasOwnerSession();
+  const initialCopy = isSignedIn ? await readCopyObject() : null;
 
   return (
     <section className="section min-h-[70vh] bg-gray-50">
       <div className="container">
-        {isSignedIn ? (
-          <OwnerCopyEditor initialCopy={copy} publishingStatus={getPublishingStatus()} />
+        {initialCopy ? (
+          <OwnerCopyEditor initialCopy={initialCopy} publishingStatus={getPublishingStatus()} />
         ) : (
           <OwnerLogin
             isConfigured={isOwnerLoginConfigured()}

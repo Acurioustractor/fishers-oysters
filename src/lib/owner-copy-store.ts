@@ -8,6 +8,9 @@ export type CopySaveResult = {
   deployHookTriggered?: boolean;
 };
 
+export type CopyJsonValue = string | number | boolean | null | undefined | CopyJsonObject | CopyJsonValue[];
+export type CopyJsonObject = { [key: string]: CopyJsonValue };
+
 const copyFilePath = 'src/content/site-copy.json';
 
 export type PublishingStatus = {
@@ -22,6 +25,10 @@ export type PublishingStatus = {
 
 function localCopyPath() {
   return path.join(process.cwd(), copyFilePath);
+}
+
+function isOnlineDeployment() {
+  return process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
 }
 
 function getGitHubTarget() {
@@ -43,6 +50,18 @@ function getGitHubTarget() {
   return { owner, repo, branch, token };
 }
 
+function getGitHubHeaders(token: string) {
+  return {
+    Authorization: `Bearer ${token}`,
+    Accept: 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+}
+
+function getGitHubCopyApiUrl(owner: string, repo: string) {
+  return `https://api.github.com/repos/${owner}/${repo}/contents/${copyFilePath}`;
+}
+
 export function getPublishingStatus(): PublishingStatus {
   const repository = process.env.GITHUB_REPOSITORY;
   let owner = process.env.GITHUB_OWNER || process.env.VERCEL_GIT_REPO_OWNER;
@@ -54,7 +73,7 @@ export function getPublishingStatus(): PublishingStatus {
 
   const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
   const branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || 'main';
-  const isOnlineDeployment = process.env.VERCEL === '1' || process.env.NODE_ENV === 'production';
+  const onlineDeployment = isOnlineDeployment();
 
   const missing = [
     !token ? 'GITHUB_TOKEN' : null,
@@ -62,9 +81,9 @@ export function getPublishingStatus(): PublishingStatus {
   ].filter(Boolean) as string[];
 
   return {
-    mode: isOnlineDeployment ? 'github-commit' : 'local-file',
-    isOnlineDeployment,
-    isConfigured: !isOnlineDeployment || missing.length === 0,
+    mode: onlineDeployment ? 'github-commit' : 'local-file',
+    isOnlineDeployment: onlineDeployment,
+    isConfigured: !onlineDeployment || missing.length === 0,
     repository: owner && repo ? `${owner}/${repo}` : undefined,
     branch,
     deployHookConfigured: Boolean(process.env.VERCEL_DEPLOY_HOOK_URL),
@@ -89,6 +108,35 @@ async function triggerDeployHook() {
   return true;
 }
 
+async function readFromGitHub() {
+  const target = getGitHubTarget();
+
+  if (!target) {
+    throw new Error(
+      'Production copy loading needs GITHUB_TOKEN plus GITHUB_REPOSITORY, or GITHUB_OWNER and GITHUB_REPO_NAME.'
+    );
+  }
+
+  const { owner, repo, branch, token } = target;
+  const apiUrl = getGitHubCopyApiUrl(owner, repo);
+  const response = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, {
+    headers: getGitHubHeaders(token),
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error(`Could not read copy file from GitHub: ${response.status}`);
+  }
+
+  const file = (await response.json()) as { content?: string };
+
+  if (typeof file.content !== 'string') {
+    throw new Error('GitHub did not return copy file content.');
+  }
+
+  return Buffer.from(file.content, 'base64').toString('utf8');
+}
+
 async function saveToGitHub(content: string): Promise<CopySaveResult> {
   const target = getGitHubTarget();
 
@@ -99,12 +147,8 @@ async function saveToGitHub(content: string): Promise<CopySaveResult> {
   }
 
   const { owner, repo, branch, token } = target;
-  const apiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${copyFilePath}`;
-  const headers = {
-    Authorization: `Bearer ${token}`,
-    Accept: 'application/vnd.github+json',
-    'X-GitHub-Api-Version': '2022-11-28',
-  };
+  const apiUrl = getGitHubCopyApiUrl(owner, repo);
+  const headers = getGitHubHeaders(token);
 
   const currentResponse = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, {
     headers,
@@ -145,19 +189,27 @@ async function saveToGitHub(content: string): Promise<CopySaveResult> {
   return {
     mode: 'github-commit',
     message: deployHookTriggered
-      ? 'Saved copy to GitHub and requested a Vercel deploy.'
-      : 'Saved copy to GitHub. Vercel will redeploy from the connected branch.',
+      ? 'Saved copy to GitHub and requested a Vercel deploy. The editor shows the saved copy right away; the public site updates after the deployment finishes.'
+      : 'Saved copy to GitHub. The editor shows the saved copy right away; the public site updates after Vercel finishes rebuilding.',
     commitUrl: result.commit?.html_url,
     deployHookTriggered,
   };
 }
 
 export async function readCopyFile() {
+  if (isOnlineDeployment() && getGitHubTarget()) {
+    return readFromGitHub();
+  }
+
   return readFile(localCopyPath(), 'utf8');
 }
 
+export async function readCopyObject(): Promise<CopyJsonObject> {
+  return JSON.parse(await readCopyFile()) as CopyJsonObject;
+}
+
 export async function saveCopyFile(content: string): Promise<CopySaveResult> {
-  const shouldCommitToGitHub = getPublishingStatus().isOnlineDeployment;
+  const shouldCommitToGitHub = isOnlineDeployment();
 
   if (shouldCommitToGitHub) {
     return saveToGitHub(content);
