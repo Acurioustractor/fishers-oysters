@@ -296,6 +296,10 @@ export default function OwnerCopyEditor({ initialCopy, publishingStatus }: Owner
                 Live publishing is ready. Saves commit to{' '}
                 <strong>{publishingStatus.repository}</strong> on{' '}
                 <strong>{publishingStatus.branch}</strong>. Vercel will rebuild the live site after the commit.
+                {' '}
+                {publishingStatus.isPublicHoldEnabled
+                  ? 'The public holding page is active; signed-in owners can still preview the real pages.'
+                  : 'The public website is live.'}
               </>
             ) : (
               <>

@@ -1,5 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { isPublicHoldEnabled } from '@/lib/site-hold';
 
 export type CopySaveResult = {
   mode: 'local-file' | 'github-commit';
@@ -20,6 +21,7 @@ export type PublishingStatus = {
   repository?: string;
   branch?: string;
   deployHookConfigured: boolean;
+  isPublicHoldEnabled: boolean;
   missing: string[];
 };
 
@@ -87,6 +89,7 @@ export function getPublishingStatus(): PublishingStatus {
     repository: owner && repo ? `${owner}/${repo}` : undefined,
     branch,
     deployHookConfigured: Boolean(process.env.VERCEL_DEPLOY_HOOK_URL),
+    isPublicHoldEnabled: isPublicHoldEnabled(),
     missing,
   };
 }
