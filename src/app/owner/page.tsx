@@ -3,6 +3,7 @@ import OwnerCopyEditor from '@/components/owner/OwnerCopyEditor';
 import OwnerLogin from '@/components/owner/OwnerLogin';
 import {
   hasOwnerSession,
+  createOwnerPreviewTokenValue,
   isOwnerLoginConfigured,
   isOwnerUsernameRequired,
   isUsingLocalDefaultPassword,
@@ -22,12 +23,13 @@ export const metadata: Metadata = {
 export default async function OwnerPage() {
   const isSignedIn = await hasOwnerSession();
   const initialCopy = isSignedIn ? await readCopyObject() : null;
+  const previewToken = isSignedIn ? createOwnerPreviewTokenValue() : '';
 
   return (
     <section className="section min-h-[70vh] bg-gray-50">
       <div className="container">
         {initialCopy ? (
-          <OwnerCopyEditor initialCopy={initialCopy} publishingStatus={getPublishingStatus()} />
+          <OwnerCopyEditor initialCopy={initialCopy} previewToken={previewToken} publishingStatus={getPublishingStatus()} />
         ) : (
           <OwnerLogin
             isConfigured={isOwnerLoginConfigured()}

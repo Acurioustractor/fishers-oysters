@@ -2,8 +2,10 @@ import { cookies } from 'next/headers';
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
 export const OWNER_SESSION_COOKIE = 'fishers_owner_session';
+export const OWNER_PREVIEW_COOKIE = 'fishers_owner_preview';
 
 const ONE_WEEK_SECONDS = 60 * 60 * 24 * 7;
+const ONE_HOUR_SECONDS = 60 * 60;
 const LOCAL_DEFAULT_PASSWORD = 'fishers-oysters';
 
 export function isUsingLocalDefaultPassword() {
@@ -29,12 +31,16 @@ export function isOwnerLoginConfigured() {
   return Boolean(getOwnerPassword());
 }
 
-function getSessionSecret() {
+export function getOwnerSessionSecret() {
   return process.env.OWNER_SESSION_SECRET || getOwnerPassword() || 'fishers-oysters-local-session';
 }
 
 function sign(value: string) {
-  return createHmac('sha256', getSessionSecret()).update(value).digest('hex');
+  return createHmac('sha256', getOwnerSessionSecret()).update(value).digest('hex');
+}
+
+function signPreview(value: string) {
+  return createHmac('sha256', getOwnerSessionSecret()).update(`owner-preview:${value}`).digest('hex');
 }
 
 function safeEquals(a: string, b: string) {
@@ -79,6 +85,13 @@ export function createOwnerSessionValue() {
   return `${payload}.${sign(payload)}`;
 }
 
+export function createOwnerPreviewTokenValue() {
+  const expiresAt = Date.now() + ONE_HOUR_SECONDS * 1000;
+  const payload = String(expiresAt);
+
+  return `${payload}.${signPreview(payload)}`;
+}
+
 export function verifyOwnerSessionValue(value: string | undefined) {
   if (!value) return false;
 
@@ -104,3 +117,4 @@ export async function hasOwnerSession() {
 }
 
 export const ownerSessionMaxAge = ONE_WEEK_SECONDS;
+export const ownerPreviewMaxAge = ONE_HOUR_SECONDS;

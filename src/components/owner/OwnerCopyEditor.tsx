@@ -16,6 +16,7 @@ type SaveResponse = {
 
 type OwnerCopyEditorProps = {
   initialCopy: JsonObject;
+  previewToken: string;
   publishingStatus: PublishingStatus;
 };
 
@@ -190,7 +191,13 @@ function CopyFields({
   );
 }
 
-export default function OwnerCopyEditor({ initialCopy, publishingStatus }: OwnerCopyEditorProps) {
+function getPreviewHref(href: string, previewToken: string) {
+  const separator = href.includes('?') ? '&' : '?';
+
+  return `${href}${separator}owner_preview=${encodeURIComponent(previewToken)}`;
+}
+
+export default function OwnerCopyEditor({ initialCopy, previewToken, publishingStatus }: OwnerCopyEditorProps) {
   const [draft, setDraft] = useState<JsonObject>(initialCopy);
   const [activeSectionKey, setActiveSectionKey] = useState('home');
   const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
@@ -362,7 +369,12 @@ export default function OwnerCopyEditor({ initialCopy, publishingStatus }: Owner
                 <h2 className="font-display text-2xl font-bold text-primary">{activeSection?.label}</h2>
               </div>
               {activeSection?.href && (
-                <a href={activeSection.href} target="_blank" rel="noopener noreferrer" className="btn-outline px-4 py-2 text-sm">
+                <a
+                  href={getPreviewHref(activeSection.href, previewToken)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline px-4 py-2 text-sm"
+                >
                   Preview page
                 </a>
               )}
