@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { sendContactEmail } from '@/lib/contact-email';
 import { submitToGHL } from '@/lib/ghl';
 
 export async function POST(request: NextRequest) {
@@ -13,6 +14,14 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    await sendContactEmail({
+      name,
+      email,
+      phone,
+      inquiryType,
+      message,
+    });
 
     // Submit to GoHighLevel if configured
     if (process.env.GHL_API_KEY && process.env.GHL_LOCATION_ID) {
