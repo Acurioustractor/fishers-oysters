@@ -77,8 +77,8 @@ export default function Hero({
             ? 'bg-foreground/60'
             : backgroundImage
               ? isHome
-                ? 'bg-gradient-to-br from-black/60 via-[#3b352b]/35 to-black/50'
-                : 'bg-gradient-to-r from-black/65 via-[#3b352b]/45 to-black/55'
+                ? 'bg-gradient-to-br from-black/60 via-[#5A432C]/35 to-black/50'
+                : 'bg-gradient-to-r from-black/65 via-[#5A432C]/45 to-black/55'
               : 'bg-gradient-to-br from-primary to-secondary'
         }`}
       />

@@ -71,7 +71,7 @@ export default function SalesPage() {
                 <h3 className="font-display text-2xl font-bold text-foreground mb-2">
                   {retail.title}
                 </h3>
-                <p className="text-3xl font-display font-bold text-accent mb-4">
+                <p className="text-3xl font-display font-bold text-secondary mb-4">
                   {retail.price}
                   <span className="text-lg text-gray-500">{retail.unit}</span>
                 </p>

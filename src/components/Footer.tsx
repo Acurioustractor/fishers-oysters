@@ -7,12 +7,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-foreground text-[#D8D0C4]">
       {/* Acknowledgement of Country */}
-      <div className="bg-gray-800 py-6">
+      <div className="bg-primary py-6">
         <div className="container">
-          <p className="text-sm text-gray-400 max-w-3xl">
-            <strong className="text-gray-300">{copy.global.footer.acknowledgementLabel}</strong>{' '}
+          <p className="text-sm text-white/75 max-w-3xl">
+            <strong className="text-white">{copy.global.footer.acknowledgementLabel}</strong>{' '}
             {copy.global.footer.acknowledgement}
           </p>
         </div>
@@ -23,7 +23,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Image src="/images/logo-full.png" alt={config.name} width={220} height={100} className="mb-4 h-auto w-auto" />
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-white/60">
               {copy.global.footer.tagline}
             </p>
           </div>
@@ -35,7 +35,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/"
-                  className="text-sm text-gray-400 hover:text-white transition-colors"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   {copy.global.footer.homeLabel}
                 </Link>
@@ -44,7 +44,7 @@ export default function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors"
+                    className="text-sm text-white/60 hover:text-white transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -56,7 +56,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="font-medium text-white mb-4">{copy.global.footer.contactHeading}</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
+            <ul className="space-y-2 text-sm text-white/60">
               {copy.global.contact.email && (
                 <li>
                   <a
@@ -78,7 +78,7 @@ export default function Footer() {
                 </li>
               )}
               {copy.global.contact.address && (
-                <li className="text-gray-500">
+                <li className="text-white/45">
                   {copy.global.contact.address}
                 </li>
               )}
@@ -87,7 +87,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-gray-500 text-center">
+        <div className="border-t border-white/10 mt-8 pt-8 text-sm text-white/45 text-center">
           <p>&copy; {currentYear} {config.name}. {copy.global.footer.copyrightSuffix}</p>
         </div>
       </div>
