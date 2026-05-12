@@ -355,6 +355,13 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
           )}
         </div>
 
+        <div className="mt-4 rounded-md border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
+          <strong className="text-slate-900">Note about yesterday:</strong>{' '}
+          the edit did not reach the save system, so there was no saved website-copy commit.
+          After changing text, click <strong>Publish changes</strong> and wait for the green saved message.
+          If the save worked, a <strong>View GitHub commit</strong> link will appear here.
+        </div>
+
         {message && (
           <div
             className={`mt-4 rounded-md border p-3 text-sm ${
