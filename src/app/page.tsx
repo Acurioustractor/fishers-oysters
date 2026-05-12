@@ -23,7 +23,7 @@ export default function HomePage() {
       <Hero
         title={copy.home.hero.title}
         description={copy.home.hero.description}
-        backgroundImage="/images/aerial-oyster-leases.jpg"
+        backgroundImage="/images/home-oyster-farm-reflections.jpg"
         cta={{ label: copy.home.hero.primaryCta, href: '/about' }}
         secondaryCta={{ label: copy.home.hero.secondaryCta, href: '/contact' }}
         variant="home"
@@ -85,8 +85,8 @@ export default function HomePage() {
 
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
               <Image
-                src="/images/working-flats.jpg"
-                alt="Working the oyster flats on Quandamooka Sea Country"
+                src="/images/home-family-on-country.jpg"
+                alt="Family walking through shallow Quandamooka waters"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -101,8 +101,8 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl lg:order-first">
               <Image
-                src="/images/oyster-tripods.jpg"
-                alt="Oyster farm structures in Moreton Bay"
+                src="/images/home-family-boat.jpg"
+                alt="Family on the boat in Quandamooka waters"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -157,9 +157,9 @@ export default function HomePage() {
           <Gallery
             columns={3}
             images={[
-              { src: '/images/between-lease-poles.jpg', alt: 'Oyster lease poles in Moreton Bay' },
-              { src: '/images/working-oyster-baskets.jpg', alt: 'Working oyster baskets on the leases' },
-              { src: '/images/group-oyster-flats.jpg', alt: 'Group experience on the oyster flats' },
+              { src: '/images/home-kids-boat.jpg', alt: 'Children on the boat beside oyster baskets' },
+              { src: '/images/home-oyster-farm-reflections.jpg', alt: 'Oyster farms on calm Quandamooka waters' },
+              { src: '/images/sales-oysters-basket.jpg', alt: 'Fresh native rock oysters on an oyster basket' },
             ]}
           />
         </div>

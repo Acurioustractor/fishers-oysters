@@ -19,7 +19,7 @@ export default function ComingSoonPage() {
   return (
     <section className="fixed inset-0 z-[100] isolate overflow-y-auto bg-[#132321] text-white">
       <Image
-        src="/images/aerial-oyster-leases.jpg"
+        src="/images/home-oyster-farm-reflections.jpg"
         alt=""
         fill
         priority

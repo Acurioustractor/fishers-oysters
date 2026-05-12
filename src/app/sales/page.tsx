@@ -97,7 +97,7 @@ export default function SalesPage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="relative aspect-video rounded-xl overflow-hidden">
-              <Image src="/images/working-oyster-baskets.jpg" alt="Fresh oysters from Moreton Bay" fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" />
+              <Image src="/images/sales-oysters-basket.jpg" alt="Fresh native rock oysters on an oyster basket" fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" />
             </div>
           </div>
         </div>
