@@ -2,7 +2,7 @@
   "name": "fishers-oysters",
   "version": "0.1.0",
   "private": true,
-  "description": "Indigenous-led aquaculture enterprise combining ecological restoration with economic sovereignty on Moreton Bay",
+  "description": "Family-run aquaculture business growing native rock oysters on Minjerribah",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

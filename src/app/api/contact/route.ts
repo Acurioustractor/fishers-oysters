@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
         email,
         phone,
         message: inquiryType ? `[${inquiryType}] ${message}` : message,
-        source: 'Fishers Oysters Website',
+        source: "Fisher's Oysters Website",
         tags,
       });
     }

@@ -5,7 +5,7 @@ import config from '../../../project.config.json';
 
 export const metadata: Metadata = {
   title: 'Coming Soon',
-  description: 'Fishers Oysters is getting its new website ready.',
+  description: "Fisher's Oysters is getting its new website ready.",
   robots: {
     index: false,
     follow: false,
@@ -45,7 +45,7 @@ export default function ComingSoonPage() {
               New website coming soon
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl">
-              Fishers Oysters is getting the new site ready. For oyster tours, oyster sales, or general enquiries, contact Shaun and the team.
+              Fisher's Oysters is getting the new site ready. For oyster sales, farm enquiries, partnerships or work opportunities, contact Shaun and the team.
             </p>
           </div>
 

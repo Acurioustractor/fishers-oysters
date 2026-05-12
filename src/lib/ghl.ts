@@ -38,7 +38,7 @@ export async function submitToGHL(data: ContactSubmission): Promise<{ success: b
       lastName,
       email: data.email,
       phone: data.phone || '',
-      source: data.source || 'Fishers Oysters Website',
+      source: data.source || "Fisher's Oysters Website",
       tags: data.tags || ['fishers-oysters', 'website-contact'],
       customFields: [
         {

@@ -7,7 +7,7 @@ type ContactEmailInput = {
 };
 
 const defaultRecipient = 'fishers.oysters@gmail.com';
-const defaultFrom = 'Fishers Oysters <onboarding@resend.dev>';
+const defaultFrom = "Fisher's Oysters <onboarding@resend.dev>";
 
 function escapeHtml(value: string) {
   return value
@@ -29,7 +29,7 @@ function getSender() {
 function getSubject(input: ContactEmailInput) {
   const type = input.inquiryType ? ` - ${input.inquiryType}` : '';
 
-  return `New Fishers Oysters enquiry${type}`;
+  return `New Fisher's Oysters enquiry${type}`;
 }
 
 function getTextBody(input: ContactEmailInput) {
@@ -56,7 +56,7 @@ function getHtmlBody(input: ContactEmailInput) {
 
   return `
     <div style="font-family: Arial, sans-serif; color: #1f2937; line-height: 1.5;">
-      <h1 style="font-size: 20px; margin: 0 0 16px;">New Fishers Oysters website enquiry</h1>
+      <h1 style="font-size: 20px; margin: 0 0 16px;">New Fisher's Oysters website enquiry</h1>
       <table style="border-collapse: collapse; width: 100%; max-width: 640px;">
         <tbody>
           ${rows

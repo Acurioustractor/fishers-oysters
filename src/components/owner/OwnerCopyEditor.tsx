@@ -30,11 +30,8 @@ const lockedKeys = new Set(['href', 'src', 'coverImage', 'url', 'id', 'icon']);
 const primarySections: EditorSection[] = [
   { key: 'home', label: 'Home page', href: '/' },
   { key: 'about', label: 'About page', href: '/about' },
-  { key: 'tours', label: 'Tours page', href: '/tours' },
   { key: 'sales', label: 'Sales page', href: '/sales' },
-  { key: 'culture', label: 'Culture page', href: '/culture' },
-  { key: 'stories', label: 'Stories page', href: '/stories' },
-  { key: 'storyDetail', label: 'Story article', href: '/stories/between-waters-and-worlds' },
+  { key: 'culture', label: 'Work on Country page', href: '/culture' },
   { key: 'contact', label: 'Contact page', href: '/contact' },
   { key: 'global', label: 'Header and footer' },
 ];

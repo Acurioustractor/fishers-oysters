@@ -1,64 +1,84 @@
 {
   "projectCode": "ACT-FO",
-  "name": "Fishers Oysters",
+  "name": "Fisher's Oysters",
   "slug": "fishers-oysters",
-  "tagline": "Oysters from Quandamooka waters",
-  "description": "Fishers Oysters is a First Nations oyster business on Quandamooka Country, growing native rock oysters and caring for old reef beds around Terangerri, Minjerribah and Moreton Bay.",
+  "tagline": "Native oysters grown in Quandamooka waters",
+  "description": "Fisher's Oysters is a family-run aquaculture business growing native rock oysters, supporting reef habitat and creating pathways into aquaculture from Minjerribah, North Stradbroke Island.",
   "theme": "earth",
   "content": {
     "hero": {
-      "heading": "Oysters grown on Quandamooka Country",
-      "subheading": "Native rock oysters from Terangerri, Minjerribah and Moreton Bay",
-      "cta": { "label": "Get in Touch", "href": "/contact" }
+      "heading": "Working oyster farms on Country",
+      "subheading": "Native oysters grown in Quandamooka waters",
+      "cta": {
+        "label": "Get in Touch",
+        "href": "/contact"
+      }
     },
     "about": {
-      "intro": "Fishers Oysters is a First Nations oyster business working on Quandamooka Country.",
-      "mission": "To grow native rock oysters, care for old reef beds, and bring more local families into paid aquaculture work.",
+      "intro": "Founded by Shaun Fisher, a proud Gorenpul man, Fisher's Oysters grows native rock oysters on Minjerribah.",
+      "mission": "To grow native rock oysters, support reef habitat and create pathways into aquaculture for First Nations families and community.",
       "values": [
-        { "title": "Country First", "description": "Working the leases in ways that keep Sea Country healthy." },
-        { "title": "Community Grown", "description": "Keeping ownership and work close to the families connected to these waters." },
-        { "title": "Quality Driven", "description": "Native rock oysters grown in the clean tidal water of Moreton Bay." },
-        { "title": "Knowledge Sharing", "description": "Teaching the work on the leases, with Elders and marine science both in the conversation." }
+        {
+          "title": "Family Run",
+          "description": "Building a strong operation that creates long-term opportunities across generations."
+        },
+        {
+          "title": "Country Connected",
+          "description": "Growing oysters and creating work connected to Quandamooka waters."
+        },
+        {
+          "title": "Native Oysters",
+          "description": "Supplying native rock oysters from working farms in Moreton Bay."
+        },
+        {
+          "title": "Work Pathways",
+          "description": "Training, employment and hands-on aquaculture experience on working oyster farms."
+        }
       ]
     },
     "stats": [
-      { "value": "4", "label": "Oyster Leases" },
-      { "value": "1000s", "label": "Oysters Growing" },
-      { "value": "65k+", "label": "Years of Quandamooka Knowledge" },
-      { "value": "1", "label": "Community-Led Enterprise" }
+      {
+        "value": "3",
+        "label": "Oyster Farms"
+      },
+      {
+        "value": "Native",
+        "label": "Rock Oysters"
+      },
+      {
+        "value": "2023",
+        "label": "First Season"
+      },
+      {
+        "value": "Family",
+        "label": "Run Operation"
+      }
     ],
     "offerings": [
       {
         "title": "Grow and Supply Oysters",
-        "description": "Native rock oysters grown on working leases in Moreton Bay.",
+        "description": "Working oyster farms supplying native rock oysters from Quandamooka (Moreton Bay).",
         "href": "/sales",
         "icon": "oyster"
       },
       {
-        "title": "Oyster Tours",
-        "description": "Walk the leases, taste oysters, and hear how the work happens on Country.",
-        "href": "/tours",
-        "icon": "compass"
-      },
-      {
         "title": "Work on Country",
-        "description": "Training and paid work for people who want to learn aquaculture on the leases.",
+        "description": "Training, employment and hands-on aquaculture experience on working oyster farms in Quandamooka waters.",
         "href": "/culture",
         "icon": "community"
       }
     ],
     "quote": {
-      "text": "The leases have to feed people, employ people, and look after Country.",
+      "text": "Don't start with a business plan. Start with your people.",
       "attribution": "Shaun Fisher"
     },
     "cta": {
       "heading": "Support Our Oysters, Support Our Community",
-      "text": "For oyster orders, tours, or project enquiries, send us a message.",
-      "button": { "label": "Contact Us", "href": "/contact" }
-    },
-    "stories": {
-      "heading": "Our Story",
-      "subheading": "Voices from the water"
+      "text": "For oyster orders, farm enquiries, partnerships or work opportunities, send us a message.",
+      "button": {
+        "label": "Contact Us",
+        "href": "/contact"
+      }
     }
   },
   "ecosystem": {
@@ -81,12 +101,22 @@
     }
   },
   "navigation": [
-    { "label": "About Us", "href": "/about" },
-    { "label": "Oyster Tours", "href": "/tours" },
-    { "label": "Oyster Sales", "href": "/sales" },
-    { "label": "Culture, Justice & Jobs", "href": "/culture" },
-    { "label": "Stories", "href": "/stories" },
-    { "label": "Contact", "href": "/contact" }
+    {
+      "label": "About Us",
+      "href": "/about"
+    },
+    {
+      "label": "Oyster Sales",
+      "href": "/sales"
+    },
+    {
+      "label": "Work on Country",
+      "href": "/culture"
+    },
+    {
+      "label": "Contact",
+      "href": "/contact"
+    }
   ],
   "social": {
     "facebook": "",

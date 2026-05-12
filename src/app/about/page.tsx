@@ -51,34 +51,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Five Principles */}
-      <section className="section">
-        <div className="container">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="section-heading text-primary text-center mb-12">
-              {copy.about.principles.heading}
-            </h2>
-            <div className="space-y-8">
-              {copy.about.principles.items.map((principle) => (
-                <div key={principle.number} className="flex gap-6 items-start">
-                  <span className="text-4xl font-display font-bold text-accent shrink-0">
-                    {principle.number}
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-display font-bold text-foreground mb-2">
-                      {principle.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {principle.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Next step */}
       <section className="section bg-white">
         <div className="container">

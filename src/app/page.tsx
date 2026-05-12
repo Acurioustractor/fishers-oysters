@@ -13,6 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const offeringGridClass =
+    copy.home.offerings.length > 2
+      ? 'md:grid-cols-3'
+      : 'md:grid-cols-2 max-w-4xl mx-auto';
+
   return (
     <>
       <Hero
@@ -40,7 +45,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className={`grid gap-8 ${offeringGridClass}`}>
             {copy.home.offerings.map((offering) => (
               <OfferingCard key={offering.title} {...offering} />
             ))}
