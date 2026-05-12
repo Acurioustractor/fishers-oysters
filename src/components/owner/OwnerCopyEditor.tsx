@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { CopyJsonObject as JsonObject, CopyJsonValue as JsonValue, PublishingStatus } from '@/lib/owner-copy-store';
 
 type PathPart = string | number;
@@ -200,6 +200,7 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
   const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [message, setMessage] = useState('');
   const [commitUrl, setCommitUrl] = useState('');
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const sections = useMemo<EditorSection[]>(() => {
     const knownKeys = new Set(primarySections.map((section) => section.key));
@@ -214,9 +215,25 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
   const activeSection = sections.find((section) => section.key === activeSectionKey) || sections[0];
   const activeValue = activeSection ? draft[activeSection.key] : null;
 
+  useEffect(() => {
+    if (!hasUnsavedChanges) return;
+
+    function warnBeforeLeaving(event: BeforeUnloadEvent) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
+
+    window.addEventListener('beforeunload', warnBeforeLeaving);
+
+    return () => window.removeEventListener('beforeunload', warnBeforeLeaving);
+  }, [hasUnsavedChanges]);
+
   function updateField(path: PathPart[], value: JsonValue) {
     setDraft((current) => setValueAtPath(current, path, value) as JsonObject);
     setStatus('idle');
+    setMessage('');
+    setCommitUrl('');
+    setHasUnsavedChanges(true);
   }
 
   async function saveCopy() {
@@ -241,9 +258,14 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
     setStatus('saved');
     setMessage(data?.message || 'Saved.');
     setCommitUrl(data?.commitUrl || '');
+    setHasUnsavedChanges(false);
   }
 
   async function reloadCopy() {
+    if (hasUnsavedChanges && !window.confirm('Reloading will discard your unsaved changes. Continue?')) {
+      return;
+    }
+
     const response = await fetch('/api/owner/copy', { cache: 'no-store' });
     if (!response.ok) return;
 
@@ -252,9 +274,15 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
     setActiveSectionKey((current) => (Object.prototype.hasOwnProperty.call(data, current) ? current : 'home'));
     setStatus('idle');
     setMessage('Reloaded the latest saved copy.');
+    setCommitUrl('');
+    setHasUnsavedChanges(false);
   }
 
   async function logout() {
+    if (hasUnsavedChanges && !window.confirm('You have unsaved changes. Sign out anyway?')) {
+      return;
+    }
+
     await fetch('/api/owner/logout', { method: 'POST' });
     window.location.reload();
   }
@@ -279,13 +307,21 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
             <button
               type="button"
               onClick={saveCopy}
-              className="btn-primary px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+              className={`px-4 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50 ${
+                hasUnsavedChanges ? 'btn-primary ring-2 ring-secondary ring-offset-2' : 'btn-primary'
+              }`}
               disabled={status === 'saving'}
             >
               {status === 'saving' ? 'Publishing...' : 'Publish changes'}
             </button>
           </div>
         </div>
+
+        {hasUnsavedChanges && (
+          <div className="mt-4 rounded-md border border-secondary/30 bg-secondary/10 p-3 text-sm font-medium text-primary">
+            Unsaved changes. Click <strong>Publish changes</strong> before previewing, reloading, signing out or closing this page.
+          </div>
+        )}
 
         <div
           className={`mt-4 rounded-md border p-3 text-sm ${
@@ -389,6 +425,24 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
           )}
         </div>
       </div>
+
+      {hasUnsavedChanges && (
+        <div className="fixed inset-x-0 bottom-0 z-50 border-t border-secondary/30 bg-white/95 px-4 py-3 shadow-2xl backdrop-blur">
+          <div className="mx-auto flex max-w-6xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm font-medium text-primary">
+              Unsaved changes on this page. Publish before leaving.
+            </p>
+            <button
+              type="button"
+              onClick={saveCopy}
+              className="btn-primary px-5 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={status === 'saving'}
+            >
+              {status === 'saving' ? 'Publishing...' : 'Publish changes'}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
