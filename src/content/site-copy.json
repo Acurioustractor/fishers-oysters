@@ -173,18 +173,18 @@
       "heading": "Ordering",
       "cards": [
         {
-          "title": "Wholesale",
-          "price": "$16",
+          "title": "Unopened oysters (closed shell) ",
+          "price": "$14 - $18",
           "unit": "/dozen",
           "points": [
-            "Restaurants, cafes & retailers",
+            "Restaurants, Wholesalers ",
             "Regular supply arrangements",
             "Moreton Bay delivery available"
           ],
           "button": "Wholesale Enquiry"
         },
         {
-          "title": "Direct Retail",
+          "title": "Opened oysters ",
           "price": "$24",
           "unit": "/dozen",
           "badge": "Coming Soon",
