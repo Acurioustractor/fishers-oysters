@@ -85,8 +85,8 @@ export default function HomePage() {
 
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
               <Image
-                src="/images/home-family-on-country.jpg"
-                alt="Family walking through shallow Quandamooka waters"
+                src="/images/home-kids-oyster-gear.jpg"
+                alt="Children moving oyster gear through shallow Quandamooka waters"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
