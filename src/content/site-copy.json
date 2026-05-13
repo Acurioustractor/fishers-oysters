@@ -35,7 +35,7 @@
     }
   },
   "home": {
-    "metadataDescription": "Fisher's Oysters is a family-run aquaculture business growing native rock oysters, supporting reef habitat and creating pathways into aquaculture from Minjerribah, North Stradbroke Island.",
+    "metadataDescription": "Fisher's Oysters is a family-run aquaculture business growing native rock oysters on Minjerribah, supporting reef restoration and creating pathways into aquaculture.",
     "hero": {
       "title": "Working oyster farms on Country",
       "description": "Fisher's Oysters is a family-run aquaculture business growing native rock oysters, supporting reef habitat and creating pathways into aquaculture from Minjerribah, North Stradbroke Island.",
@@ -49,11 +49,11 @@
       },
       {
         "value": "Native",
-        "label": "Rock Oysters"
+        "label": "Quandamooka rock Oysters"
       },
       {
-        "value": "2023",
-        "label": "First Season"
+        "value": "Quampi ",
+        "label": "Pearl oyster"
       },
       {
         "value": "Family",
@@ -69,13 +69,13 @@
     "offerings": [
       {
         "title": "Grow and Supply Oysters",
-        "description": "Working oyster farms supplying native rock oysters from Quandamooka (Moreton Bay).",
+        "description": "Working oyster farms supplying Quandamooka rock oysters from Minjerribah (North Stradbroke Island), (Moreton Bay).",
         "href": "/sales",
         "icon": "oyster"
       },
       {
         "title": "Work on Country",
-        "description": "Training, employment and hands-on aquaculture experience on working oyster farms in Quandamooka waters.",
+        "description": "Training, employment and hands-on aquaculture experience, on working oyster farms in Quandamooka waters.",
         "href": "/culture",
         "icon": "community"
       }
@@ -102,7 +102,7 @@
         },
         {
           "value": "2023",
-          "label": "First Oyster Season"
+          "label": "Established"
         }
       ]
     },
