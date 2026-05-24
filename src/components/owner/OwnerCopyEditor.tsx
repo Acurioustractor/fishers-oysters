@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CopyJsonObject as JsonObject, CopyJsonValue as JsonValue, PublishingStatus } from '@/lib/owner-copy-store';
+import type { SiteHoldOverrideSource } from '@/lib/site-hold';
+import type { SiteState } from '@/lib/site-state-store';
 
 type PathPart = string | number;
 
@@ -23,10 +25,21 @@ type UploadResponse = {
   error?: string;
 };
 
+type SiteStateSaveResponse = {
+  success?: boolean;
+  publicHold?: boolean;
+  message?: string;
+  commitUrl?: string;
+  deployHookTriggered?: boolean;
+  error?: string;
+};
+
 type OwnerCopyEditorProps = {
   initialCopy: JsonObject;
   previewToken: string;
   publishingStatus: PublishingStatus;
+  initialSiteState: SiteState;
+  siteHoldOverrideSource: SiteHoldOverrideSource;
 };
 
 type EditorSection = {
@@ -314,13 +327,25 @@ function getPreviewHref(href: string, previewToken: string) {
   return `${href}${separator}owner_preview=${encodeURIComponent(previewToken)}`;
 }
 
-export default function OwnerCopyEditor({ initialCopy, previewToken, publishingStatus }: OwnerCopyEditorProps) {
+export default function OwnerCopyEditor({
+  initialCopy,
+  previewToken,
+  publishingStatus,
+  initialSiteState,
+  siteHoldOverrideSource,
+}: OwnerCopyEditorProps) {
   const [draft, setDraft] = useState<JsonObject>(initialCopy);
   const [activeSectionKey, setActiveSectionKey] = useState('home');
   const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [message, setMessage] = useState('');
   const [commitUrl, setCommitUrl] = useState('');
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+  const [siteState, setSiteState] = useState<SiteState>(initialSiteState);
+  const [siteStatus, setSiteStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [siteMessage, setSiteMessage] = useState('');
+  const [siteCommitUrl, setSiteCommitUrl] = useState('');
+  const isEnvOverridden = siteHoldOverrideSource !== 'file';
 
   const sections = useMemo<EditorSection[]>(() => {
     const knownKeys = new Set(primarySections.map((section) => section.key));
@@ -396,6 +421,48 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
     setMessage('Reloaded the latest saved copy.');
     setCommitUrl('');
     setHasUnsavedChanges(false);
+  }
+
+  async function toggleSitePublished() {
+    if (siteStatus === 'saving') return;
+
+    if (isEnvOverridden) {
+      setSiteStatus('error');
+      setSiteMessage(
+        'The SITE_HOLD environment variable in Vercel is forcing the site state. Remove it to publish or unpublish from this page.',
+      );
+      return;
+    }
+
+    const goingLive = siteState.publicHold;
+    const confirmCopy = goingLive
+      ? 'Publish the site? The public website will go live after Vercel finishes rebuilding (about 1 minute).'
+      : 'Take the site offline? Visitors will see the holding page after Vercel finishes rebuilding (about 1 minute).';
+
+    if (!window.confirm(confirmCopy)) return;
+
+    setSiteStatus('saving');
+    setSiteMessage('');
+    setSiteCommitUrl('');
+
+    const response = await fetch('/api/owner/site-state', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ publicHold: !goingLive ? true : false }),
+    });
+
+    const data = (await response.json().catch(() => null)) as SiteStateSaveResponse | null;
+
+    if (!response.ok || typeof data?.publicHold !== 'boolean') {
+      setSiteStatus('error');
+      setSiteMessage(data?.error || 'Could not update site state.');
+      return;
+    }
+
+    setSiteState({ publicHold: data.publicHold });
+    setSiteStatus('saved');
+    setSiteMessage(data.message || 'Saved.');
+    setSiteCommitUrl(data.commitUrl || '');
   }
 
   async function logout() {
@@ -475,11 +542,69 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
           )}
         </div>
 
-        <div className="mt-4 rounded-md border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
-          <strong className="text-slate-900">Note about yesterday:</strong>{' '}
-          the edit did not reach the save system, so there was no saved website-copy commit.
-          After changing text, click <strong>Publish changes</strong> and wait for the green saved message.
-          If the save worked, a <strong>View GitHub commit</strong> link will appear here.
+        <div
+          className={`mt-4 rounded-md border p-4 text-sm ${
+            siteState.publicHold
+              ? 'border-amber-200 bg-amber-50 text-amber-900'
+              : 'border-emerald-200 bg-emerald-50 text-emerald-900'
+          }`}
+        >
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-semibold">
+                {siteState.publicHold ? 'Site is offline (holding page)' : 'Site is LIVE'}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed opacity-90">
+                {siteState.publicHold
+                  ? 'Visitors see the coming-soon holding page. Signed-in owners can still preview the real pages.'
+                  : 'The public website is visible to everyone.'}
+                {isEnvOverridden && (
+                  <>
+                    {' '}
+                    <strong>
+                      The SITE_HOLD environment variable in Vercel is forcing this state. Remove it to control publishing from this page.
+                    </strong>
+                  </>
+                )}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={toggleSitePublished}
+              disabled={siteStatus === 'saving' || isEnvOverridden}
+              className={`shrink-0 rounded-md px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                siteState.publicHold ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-amber-600 hover:bg-amber-700'
+              }`}
+            >
+              {siteStatus === 'saving'
+                ? 'Saving...'
+                : siteState.publicHold
+                ? 'Publish site live'
+                : 'Take site offline'}
+            </button>
+          </div>
+
+          {siteMessage && (
+            <div
+              className={`mt-3 rounded-md border p-3 text-xs ${
+                siteStatus === 'error'
+                  ? 'border-red-200 bg-red-50 text-red-700'
+                  : 'border-white/60 bg-white/70 text-slate-700'
+              }`}
+            >
+              <p>{siteMessage}</p>
+              {siteCommitUrl && (
+                <a
+                  href={siteCommitUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-block underline"
+                >
+                  View GitHub commit
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         {message && (

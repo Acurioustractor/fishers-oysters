@@ -32,6 +32,16 @@
       "email": "fishers.oysters@gmail.com",
       "phone": "",
       "address": "Quandamooka Country, North Stradbroke Island (Minjerribah), Moreton Bay, Queensland"
+    },
+    "images": {
+      "logoFull": {
+        "src": "/images/logo-full.png",
+        "alt": "Fisher's Oysters"
+      },
+      "logoIcon": {
+        "src": "/images/logo-icon.png",
+        "alt": "Fisher's Oysters logo"
+      }
     }
   },
   "home": {
@@ -118,6 +128,34 @@
       "heading": "Support Our Oysters, Support Our Community",
       "text": "For oyster orders, farm enquiries, partnerships or work opportunities, send us a message.",
       "button": "Contact Us"
+    },
+    "images": {
+      "hero": {
+        "src": "/images/home-oyster-farm-reflections.jpg",
+        "alt": "Oyster farms on calm Quandamooka waters"
+      },
+      "onFarms": {
+        "src": "/images/home-kids-oyster-gear.jpg",
+        "alt": "Children moving oyster gear through shallow Quandamooka waters"
+      },
+      "family": {
+        "src": "/images/home-family-boat.jpg",
+        "alt": "Family on the boat in Quandamooka waters"
+      },
+      "gallery": [
+        {
+          "src": "/images/home-kids-boat.jpg",
+          "alt": "Children on the boat beside oyster baskets"
+        },
+        {
+          "src": "/images/home-oyster-farm-reflections.jpg",
+          "alt": "Oyster farms on calm Quandamooka waters"
+        },
+        {
+          "src": "/images/sales-oysters-basket.jpg",
+          "alt": "Fresh native rock oysters on an oyster basket"
+        }
+      ]
     }
   },
   "about": {
@@ -156,6 +194,16 @@
       "heading": "Work With Fisher's Oysters",
       "text": "For oyster supply, work opportunities, partnerships or farm enquiries, send Shaun and the team a message.",
       "button": "Contact Us"
+    },
+    "images": {
+      "feature": {
+        "src": "/images/between-lease-poles.jpg",
+        "alt": "Shaun Fisher on the oyster leases, Moreton Bay"
+      },
+      "profile": {
+        "src": "/images/fisher-portrait.jpg",
+        "alt": "Shaun Fisher"
+      }
     }
   },
   "sales": {
@@ -201,6 +249,12 @@
       "heading": "Order Our Oysters",
       "text": "Looking for oysters for your restaurant, event or market? Get in touch.",
       "button": "Contact Us"
+    },
+    "images": {
+      "feature": {
+        "src": "/images/sales-oysters-basket.jpg",
+        "alt": "Fresh native rock oysters on an oyster basket"
+      }
     }
   },
   "culture": {
@@ -249,6 +303,12 @@
       "heading": "Talk to Shaun",
       "text": "For work, partnership or aquaculture enquiries, send a message.",
       "button": "Contact Us"
+    },
+    "images": {
+      "feature": {
+        "src": "/images/working-flats.jpg",
+        "alt": "Working aquaculture on Quandamooka sea country"
+      }
     }
   },
   "contact": {
