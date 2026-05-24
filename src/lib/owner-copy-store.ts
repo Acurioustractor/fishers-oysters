@@ -9,10 +9,15 @@ export type CopySaveResult = {
   deployHookTriggered?: boolean;
 };
 
+export type ImageSaveResult = CopySaveResult & {
+  src: string;
+};
+
 export type CopyJsonValue = string | number | boolean | null | undefined | CopyJsonObject | CopyJsonValue[];
 export type CopyJsonObject = { [key: string]: CopyJsonValue };
 
 const copyFilePath = 'src/content/site-copy.json';
+const imagesDir = 'public/images';
 
 export type PublishingStatus = {
   mode: 'local-file' | 'github-commit';
@@ -62,6 +67,31 @@ function getGitHubHeaders(token: string) {
 
 function getGitHubCopyApiUrl(owner: string, repo: string) {
   return `https://api.github.com/repos/${owner}/${repo}/contents/${copyFilePath}`;
+}
+
+function getGitHubFileApiUrl(owner: string, repo: string, filePath: string) {
+  const encoded = filePath
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/');
+  return `https://api.github.com/repos/${owner}/${repo}/contents/${encoded}`;
+}
+
+function sanitiseImageFilename(filename: string) {
+  const ext = path.extname(filename).toLowerCase().replace(/[^a-z0-9.]/g, '');
+  const stem = path
+    .basename(filename, path.extname(filename))
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+  const safeStem = stem || 'image';
+  const safeExt = /^\.(jpe?g|png|webp|gif|svg|avif)$/.test(ext) ? ext : '.jpg';
+  return `${safeStem}${safeExt}`;
+}
+
+function localImagePath(filename: string) {
+  return path.join(process.cwd(), imagesDir, filename);
 }
 
 export function getPublishingStatus(): PublishingStatus {
@@ -223,5 +253,83 @@ export async function saveCopyFile(content: string): Promise<CopySaveResult> {
   return {
     mode: 'local-file',
     message: 'Saved copy to src/content/site-copy.json. The local dev site will refresh automatically.',
+  };
+}
+
+async function saveImageToGitHub(filename: string, buffer: Buffer): Promise<ImageSaveResult> {
+  const target = getGitHubTarget();
+
+  if (!target) {
+    throw new Error(
+      'Production image uploads need GITHUB_TOKEN plus GITHUB_REPOSITORY, or GITHUB_OWNER and GITHUB_REPO_NAME.'
+    );
+  }
+
+  const { owner, repo, branch, token } = target;
+  const filePath = `${imagesDir}/${filename}`;
+  const apiUrl = getGitHubFileApiUrl(owner, repo, filePath);
+  const headers = getGitHubHeaders(token);
+
+  const currentResponse = await fetch(`${apiUrl}?ref=${encodeURIComponent(branch)}`, {
+    headers,
+    cache: 'no-store',
+  });
+
+  let sha: string | undefined;
+
+  if (currentResponse.ok) {
+    const current = await currentResponse.json();
+    sha = current.sha;
+  } else if (currentResponse.status !== 404) {
+    throw new Error(`Could not read image file from GitHub: ${currentResponse.status}`);
+  }
+
+  const updateResponse = await fetch(apiUrl, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      message: sha ? `Replace image ${filename}` : `Add image ${filename}`,
+      branch,
+      content: buffer.toString('base64'),
+      sha,
+    }),
+    cache: 'no-store',
+  });
+
+  if (!updateResponse.ok) {
+    throw new Error(`Could not save image to GitHub: ${updateResponse.status}`);
+  }
+
+  const result = await updateResponse.json();
+  const deployHookTriggered = await triggerDeployHook();
+  const src = `/images/${filename}`;
+
+  return {
+    mode: 'github-commit',
+    src,
+    message: deployHookTriggered
+      ? `Uploaded ${filename} to GitHub and requested a Vercel deploy. The new photo will appear on the public site after the deployment finishes.`
+      : `Uploaded ${filename} to GitHub. The new photo will appear on the public site after Vercel finishes rebuilding.`,
+    commitUrl: result.commit?.html_url,
+    deployHookTriggered,
+  };
+}
+
+export async function saveImageFile(originalFilename: string, buffer: Buffer): Promise<ImageSaveResult> {
+  const filename = sanitiseImageFilename(originalFilename);
+
+  if (isOnlineDeployment()) {
+    return saveImageToGitHub(filename, buffer);
+  }
+
+  await writeFile(localImagePath(filename), buffer);
+
+  return {
+    mode: 'local-file',
+    src: `/images/${filename}`,
+    message: `Saved photo to public/images/${filename}. The local dev site will refresh automatically.`,
   };
 }

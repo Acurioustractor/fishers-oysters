@@ -9,6 +9,8 @@ import {
   isUsingLocalDefaultPassword,
 } from '@/lib/owner-auth';
 import { getPublishingStatus, readCopyObject } from '@/lib/owner-copy-store';
+import { getSiteHoldOverrideSource } from '@/lib/site-hold';
+import { readSiteState } from '@/lib/site-state-store';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,12 +26,19 @@ export default async function OwnerPage() {
   const isSignedIn = await hasOwnerSession();
   const initialCopy = isSignedIn ? await readCopyObject() : null;
   const previewToken = isSignedIn ? createOwnerPreviewTokenValue() : '';
+  const initialSiteState = isSignedIn ? await readSiteState() : null;
 
   return (
     <section className="section min-h-[70vh] bg-gray-50">
       <div className="container">
-        {initialCopy ? (
-          <OwnerCopyEditor initialCopy={initialCopy} previewToken={previewToken} publishingStatus={getPublishingStatus()} />
+        {initialCopy && initialSiteState ? (
+          <OwnerCopyEditor
+            initialCopy={initialCopy}
+            previewToken={previewToken}
+            publishingStatus={getPublishingStatus()}
+            initialSiteState={initialSiteState}
+            siteHoldOverrideSource={getSiteHoldOverrideSource()}
+          />
         ) : (
           <OwnerLogin
             isConfigured={isOwnerLoginConfigured()}

@@ -1,52 +1,66 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, readFile } from 'fs/promises';
-import path from 'path';
+import { hasOwnerSession } from '@/lib/owner-auth';
+import { saveImageFile } from '@/lib/owner-copy-store';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const MAX_BYTES = 8 * 1024 * 1024;
+const ALLOWED_TYPES = new Set([
+  'image/jpeg',
+  'image/png',
+  'image/webp',
+  'image/gif',
+  'image/svg+xml',
+  'image/avif',
+]);
 
 export async function POST(request: NextRequest) {
-  // Only allow in development
-  if (process.env.NODE_ENV !== 'development') {
-    return NextResponse.json({ error: 'Not available in production' }, { status: 403 });
+  if (!(await hasOwnerSession())) {
+    return NextResponse.json({ error: 'Not signed in.' }, { status: 401 });
   }
 
+  let formData: FormData;
+
   try {
-    const formData = await request.formData();
-    const file = formData.get('file') as File;
-    const slot = formData.get('slot') as string;
+    formData = await request.formData();
+  } catch {
+    return NextResponse.json({ error: 'Could not read upload.' }, { status: 400 });
+  }
 
-    if (!file || !slot) {
-      return NextResponse.json({ error: 'File and slot required' }, { status: 400 });
-    }
+  const file = formData.get('file');
 
-    // Sanitise filename
-    const ext = path.extname(file.name).toLowerCase();
-    const safeName = slot
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '');
-    const filename = `${safeName}${ext}`;
+  if (!(file instanceof File)) {
+    return NextResponse.json({ error: 'A photo file is required.' }, { status: 400 });
+  }
 
-    // Write file to public/images/
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    const filePath = path.join(process.cwd(), 'public', 'images', filename);
-    await writeFile(filePath, buffer);
+  if (file.size === 0) {
+    return NextResponse.json({ error: 'The selected photo is empty.' }, { status: 400 });
+  }
 
-    // Update manifest
-    const manifestPath = path.join(process.cwd(), 'public', 'images', 'manifest.json');
-    let manifest: Record<string, string> = {};
-    try {
-      const raw = await readFile(manifestPath, 'utf-8');
-      manifest = JSON.parse(raw);
-    } catch {
-      // Start fresh if missing
-    }
-    manifest[slot] = `/images/${filename}`;
-    await writeFile(manifestPath, JSON.stringify(manifest, null, 2));
+  if (file.size > MAX_BYTES) {
+    return NextResponse.json({ error: 'Photos must be 8 MB or smaller.' }, { status: 400 });
+  }
 
-    return NextResponse.json({ src: `/images/${filename}` });
+  if (file.type && !ALLOWED_TYPES.has(file.type)) {
+    return NextResponse.json(
+      { error: 'Only JPG, PNG, WEBP, GIF, AVIF or SVG photos are supported.' },
+      { status: 400 }
+    );
+  }
+
+  const slot = typeof formData.get('slot') === 'string' ? (formData.get('slot') as string) : '';
+  const originalName = slot.trim() || file.name || 'photo';
+  const buffer = Buffer.from(await file.arrayBuffer());
+
+  try {
+    const result = await saveImageFile(originalName, buffer);
+    return NextResponse.json({ success: true, ...result });
   } catch (error) {
-    console.error('Upload error:', error);
-    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+    console.error('Owner image upload failed:', error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Could not save photo.' },
+      { status: 500 }
+    );
   }
 }

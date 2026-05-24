@@ -35,7 +35,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="relative aspect-video rounded-xl overflow-hidden">
-              <Image src="/images/between-lease-poles.jpg" alt="Shaun Fisher on the oyster leases, Moreton Bay" fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" />
+              <Image src={copy.about.images.feature.src} alt={copy.about.images.feature.alt} fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" />
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@ export default function AboutPage() {
             <div className="bg-gray-50 rounded-2xl p-8 md:p-10 md:flex md:gap-8 md:items-start">
               <div className="shrink-0 mb-6 md:mb-0">
                 <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-xl overflow-hidden">
-                  <Image src="/images/fisher-portrait.jpg" alt="Shaun Fisher" fill className="object-cover" sizes="192px" />
+                  <Image src={copy.about.images.profile.src} alt={copy.about.images.profile.alt} fill className="object-cover" sizes="192px" />
                 </div>
               </div>
               <div>

@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CopyJsonObject as JsonObject, CopyJsonValue as JsonValue, PublishingStatus } from '@/lib/owner-copy-store';
+import type { SiteHoldOverrideSource } from '@/lib/site-hold';
+import type { SiteState } from '@/lib/site-state-store';
 
 type PathPart = string | number;
 
@@ -14,10 +16,30 @@ type SaveResponse = {
   error?: string;
 };
 
+type UploadResponse = {
+  success?: boolean;
+  src?: string;
+  message?: string;
+  commitUrl?: string;
+  deployHookTriggered?: boolean;
+  error?: string;
+};
+
+type SiteStateSaveResponse = {
+  success?: boolean;
+  publicHold?: boolean;
+  message?: string;
+  commitUrl?: string;
+  deployHookTriggered?: boolean;
+  error?: string;
+};
+
 type OwnerCopyEditorProps = {
   initialCopy: JsonObject;
   previewToken: string;
   publishingStatus: PublishingStatus;
+  initialSiteState: SiteState;
+  siteHoldOverrideSource: SiteHoldOverrideSource;
 };
 
 type EditorSection = {
@@ -26,7 +48,8 @@ type EditorSection = {
   href?: string;
 };
 
-const lockedKeys = new Set(['href', 'src', 'coverImage', 'url', 'id', 'icon']);
+const lockedKeys = new Set(['href', 'url', 'id', 'icon']);
+const imageFieldKeys = new Set(['src', 'coverImage', 'backgroundImage', 'image', 'logo']);
 const primarySections: EditorSection[] = [
   { key: 'home', label: 'Home page', href: '/' },
   { key: 'about', label: 'About page', href: '/about' },
@@ -50,6 +73,112 @@ function humanize(value: string) {
 function shouldHideStringField(key: string, path: PathPart[]) {
   if (lockedKeys.has(key)) return true;
   return key === 'value' && path.includes('options');
+}
+
+function isImageField(key: string, value: JsonValue) {
+  if (imageFieldKeys.has(key)) return true;
+  return typeof value === 'string' && /^\/images\//.test(value);
+}
+
+function slotHintFromPath(path: PathPart[]) {
+  return path
+    .map((part) => String(part))
+    .filter((part) => part && part !== 'images' && part !== 'src')
+    .join('-')
+    .toLowerCase();
+}
+
+function ImageUploadField({
+  fieldKey,
+  path,
+  value,
+  onChange,
+}: {
+  fieldKey: string;
+  path: PathPart[];
+  value: JsonValue;
+  onChange: (path: PathPart[], value: JsonValue) => void;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
+  const currentSrc = typeof value === 'string' ? value : '';
+
+  async function handleFile(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setMessage('');
+    setError('');
+
+    const formData = new FormData();
+    formData.append('file', file);
+    const slot = slotHintFromPath(path) || file.name;
+    formData.append('slot', slot);
+
+    try {
+      const response = await fetch('/api/upload-image', { method: 'POST', body: formData });
+      const data = (await response.json().catch(() => null)) as UploadResponse | null;
+
+      if (!response.ok || !data?.src) {
+        throw new Error(data?.error || 'Could not upload the photo.');
+      }
+
+      onChange(path, data.src);
+      setMessage(data.message || 'Photo uploaded. Click Publish changes to save.');
+    } catch (uploadError) {
+      setError(uploadError instanceof Error ? uploadError.message : 'Could not upload the photo.');
+    } finally {
+      setUploading(false);
+      if (inputRef.current) inputRef.current.value = '';
+    }
+  }
+
+  return (
+    <div className="space-y-2">
+      <span className="block text-sm font-medium text-gray-700">{humanize(fieldKey === 'src' ? 'photo' : fieldKey)}</span>
+      <div className="flex items-start gap-4 rounded-lg border border-gray-300 bg-white p-3">
+        <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-md bg-gray-100">
+          {currentSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={currentSrc} alt="Current photo" className="h-full w-full object-cover" />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">No photo</div>
+          )}
+        </div>
+        <div className="flex-1 space-y-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => inputRef.current?.click()}
+              disabled={uploading}
+              className="btn-outline px-3 py-1.5 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {uploading ? 'Uploading…' : currentSrc ? 'Replace photo' : 'Upload photo'}
+            </button>
+            {currentSrc && (
+              <code className="break-all text-xs text-gray-500">{currentSrc}</code>
+            )}
+          </div>
+          <p className="text-xs text-gray-500">
+            JPG, PNG, WEBP, GIF, AVIF or SVG. Max 8 MB. After uploading, click <strong>Publish changes</strong> to save.
+          </p>
+          {message && <p className="text-xs text-green-700">{message}</p>}
+          {error && <p className="text-xs text-red-700">{error}</p>}
+        </div>
+      </div>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,image/avif"
+        className="hidden"
+        onChange={handleFile}
+      />
+    </div>
+  );
 }
 
 function setValueAtPath(value: JsonValue, path: PathPart[], nextValue: JsonValue): JsonValue {
@@ -85,6 +214,10 @@ function Field({
   onChange: (path: PathPart[], value: JsonValue) => void;
 }) {
   if (typeof value === 'string') {
+    if (isImageField(fieldKey, value)) {
+      return <ImageUploadField fieldKey={fieldKey} path={path} value={value} onChange={onChange} />;
+    }
+
     if (shouldHideStringField(fieldKey, path)) return null;
 
     const isLong = value.length > 80 || value.includes('.') || value.includes('\n');
@@ -194,13 +327,25 @@ function getPreviewHref(href: string, previewToken: string) {
   return `${href}${separator}owner_preview=${encodeURIComponent(previewToken)}`;
 }
 
-export default function OwnerCopyEditor({ initialCopy, previewToken, publishingStatus }: OwnerCopyEditorProps) {
+export default function OwnerCopyEditor({
+  initialCopy,
+  previewToken,
+  publishingStatus,
+  initialSiteState,
+  siteHoldOverrideSource,
+}: OwnerCopyEditorProps) {
   const [draft, setDraft] = useState<JsonObject>(initialCopy);
   const [activeSectionKey, setActiveSectionKey] = useState('home');
   const [status, setStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [message, setMessage] = useState('');
   const [commitUrl, setCommitUrl] = useState('');
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+
+  const [siteState, setSiteState] = useState<SiteState>(initialSiteState);
+  const [siteStatus, setSiteStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [siteMessage, setSiteMessage] = useState('');
+  const [siteCommitUrl, setSiteCommitUrl] = useState('');
+  const isEnvOverridden = siteHoldOverrideSource !== 'file';
 
   const sections = useMemo<EditorSection[]>(() => {
     const knownKeys = new Set(primarySections.map((section) => section.key));
@@ -276,6 +421,48 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
     setMessage('Reloaded the latest saved copy.');
     setCommitUrl('');
     setHasUnsavedChanges(false);
+  }
+
+  async function toggleSitePublished() {
+    if (siteStatus === 'saving') return;
+
+    if (isEnvOverridden) {
+      setSiteStatus('error');
+      setSiteMessage(
+        'The SITE_HOLD environment variable in Vercel is forcing the site state. Remove it to publish or unpublish from this page.',
+      );
+      return;
+    }
+
+    const goingLive = siteState.publicHold;
+    const confirmCopy = goingLive
+      ? 'Publish the site? The public website will go live after Vercel finishes rebuilding (about 1 minute).'
+      : 'Take the site offline? Visitors will see the holding page after Vercel finishes rebuilding (about 1 minute).';
+
+    if (!window.confirm(confirmCopy)) return;
+
+    setSiteStatus('saving');
+    setSiteMessage('');
+    setSiteCommitUrl('');
+
+    const response = await fetch('/api/owner/site-state', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ publicHold: !goingLive ? true : false }),
+    });
+
+    const data = (await response.json().catch(() => null)) as SiteStateSaveResponse | null;
+
+    if (!response.ok || typeof data?.publicHold !== 'boolean') {
+      setSiteStatus('error');
+      setSiteMessage(data?.error || 'Could not update site state.');
+      return;
+    }
+
+    setSiteState({ publicHold: data.publicHold });
+    setSiteStatus('saved');
+    setSiteMessage(data.message || 'Saved.');
+    setSiteCommitUrl(data.commitUrl || '');
   }
 
   async function logout() {
@@ -355,11 +542,69 @@ export default function OwnerCopyEditor({ initialCopy, previewToken, publishingS
           )}
         </div>
 
-        <div className="mt-4 rounded-md border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
-          <strong className="text-slate-900">Note about yesterday:</strong>{' '}
-          the edit did not reach the save system, so there was no saved website-copy commit.
-          After changing text, click <strong>Publish changes</strong> and wait for the green saved message.
-          If the save worked, a <strong>View GitHub commit</strong> link will appear here.
+        <div
+          className={`mt-4 rounded-md border p-4 text-sm ${
+            siteState.publicHold
+              ? 'border-amber-200 bg-amber-50 text-amber-900'
+              : 'border-emerald-200 bg-emerald-50 text-emerald-900'
+          }`}
+        >
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="font-semibold">
+                {siteState.publicHold ? 'Site is offline (holding page)' : 'Site is LIVE'}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed opacity-90">
+                {siteState.publicHold
+                  ? 'Visitors see the coming-soon holding page. Signed-in owners can still preview the real pages.'
+                  : 'The public website is visible to everyone.'}
+                {isEnvOverridden && (
+                  <>
+                    {' '}
+                    <strong>
+                      The SITE_HOLD environment variable in Vercel is forcing this state. Remove it to control publishing from this page.
+                    </strong>
+                  </>
+                )}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={toggleSitePublished}
+              disabled={siteStatus === 'saving' || isEnvOverridden}
+              className={`shrink-0 rounded-md px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                siteState.publicHold ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-amber-600 hover:bg-amber-700'
+              }`}
+            >
+              {siteStatus === 'saving'
+                ? 'Saving...'
+                : siteState.publicHold
+                ? 'Publish site live'
+                : 'Take site offline'}
+            </button>
+          </div>
+
+          {siteMessage && (
+            <div
+              className={`mt-3 rounded-md border p-3 text-xs ${
+                siteStatus === 'error'
+                  ? 'border-red-200 bg-red-50 text-red-700'
+                  : 'border-white/60 bg-white/70 text-slate-700'
+              }`}
+            >
+              <p>{siteMessage}</p>
+              {siteCommitUrl && (
+                <a
+                  href={siteCommitUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-block underline"
+                >
+                  View GitHub commit
+                </a>
+              )}
+            </div>
+          )}
         </div>
 
         {message && (
