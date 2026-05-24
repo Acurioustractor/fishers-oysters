@@ -21,7 +21,7 @@ export default function Header() {
           <nav className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex min-w-0 items-center gap-1">
-              <Image src="/images/logo-icon.png" alt="" width={80} height={64} className="-my-3 h-16 w-20 shrink-0" priority />
+              <Image src={copy.global.images.logoIcon.src} alt={copy.global.images.logoIcon.alt} width={80} height={64} className="-my-3 h-16 w-20 shrink-0" priority />
               <span className="truncate font-display text-lg font-bold text-primary sm:text-xl">{config.name}</span>
             </Link>
 

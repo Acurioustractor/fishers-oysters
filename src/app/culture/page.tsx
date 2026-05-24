@@ -74,7 +74,7 @@ export default function CulturePage() {
         <div className="container">
           <div className="max-w-4xl mx-auto">
             <div className="relative aspect-video rounded-xl overflow-hidden">
-              <Image src="/images/working-flats.jpg" alt="Working aquaculture on Quandamooka sea country" fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" />
+              <Image src={copy.culture.images.feature.src} alt={copy.culture.images.feature.alt} fill className="object-cover" sizes="(max-width: 896px) 100vw, 896px" />
             </div>
           </div>
         </div>

@@ -77,6 +77,8 @@ Remote edit flow:
 5. The site commits `src/content/site-copy.json` to GitHub.
 6. Vercel rebuilds and the deployed website updates after the deployment finishes.
 
+Photos are uploaded the same way. The owner editor shows an **Images** group for each page; clicking **Upload photo** sends the file to `/api/upload-image`, which commits the binary into `public/images/` on the configured GitHub branch (using the same `GITHUB_TOKEN`). Pressing **Publish changes** then commits the updated `src/content/site-copy.json` so the new photo path is referenced live. The `GITHUB_TOKEN` must have contents read/write access for both files and images to publish.
+
 Edit `project.config.json` only for low-level site settings:
 
 - Site name, tagline, and description

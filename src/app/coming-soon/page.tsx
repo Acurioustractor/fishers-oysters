@@ -19,7 +19,7 @@ export default function ComingSoonPage() {
   return (
     <section className="fixed inset-0 z-[100] isolate overflow-y-auto bg-foreground text-white">
       <Image
-        src="/images/home-oyster-farm-reflections.jpg"
+        src={copy.home.images.hero.src}
         alt=""
         fill
         priority
@@ -31,7 +31,7 @@ export default function ComingSoonPage() {
         <div className="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div className="max-w-3xl">
             <Image
-              src="/images/logo-full.png"
+              src={copy.global.images.logoFull.src}
               alt={config.name}
               width={230}
               height={100}

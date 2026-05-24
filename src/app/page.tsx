@@ -23,7 +23,7 @@ export default function HomePage() {
       <Hero
         title={copy.home.hero.title}
         description={copy.home.hero.description}
-        backgroundImage="/images/home-oyster-farm-reflections.jpg"
+        backgroundImage={copy.home.images.hero.src}
         cta={{ label: copy.home.hero.primaryCta, href: '/about' }}
         secondaryCta={{ label: copy.home.hero.secondaryCta, href: '/contact' }}
         variant="home"
@@ -85,8 +85,8 @@ export default function HomePage() {
 
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
               <Image
-                src="/images/home-kids-oyster-gear.jpg"
-                alt="Children moving oyster gear through shallow Quandamooka waters"
+                src={copy.home.images.onFarms.src}
+                alt={copy.home.images.onFarms.alt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -101,8 +101,8 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-[4/3] overflow-hidden rounded-xl lg:order-first">
               <Image
-                src="/images/home-family-boat.jpg"
-                alt="Family on the boat in Quandamooka waters"
+                src={copy.home.images.family.src}
+                alt={copy.home.images.family.alt}
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -154,14 +154,7 @@ export default function HomePage() {
               {copy.home.gallery.heading}
             </h2>
           </div>
-          <Gallery
-            columns={3}
-            images={[
-              { src: '/images/home-kids-boat.jpg', alt: 'Children on the boat beside oyster baskets' },
-              { src: '/images/home-oyster-farm-reflections.jpg', alt: 'Oyster farms on calm Quandamooka waters' },
-              { src: '/images/sales-oysters-basket.jpg', alt: 'Fresh native rock oysters on an oyster basket' },
-            ]}
-          />
+          <Gallery columns={3} images={copy.home.images.gallery} />
         </div>
       </section>
 

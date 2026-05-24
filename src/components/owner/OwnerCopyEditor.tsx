@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { CopyJsonObject as JsonObject, CopyJsonValue as JsonValue, PublishingStatus } from '@/lib/owner-copy-store';
 
 type PathPart = string | number;
@@ -9,6 +9,15 @@ type SaveResponse = {
   success?: boolean;
   message?: string;
   mode?: string;
+  commitUrl?: string;
+  deployHookTriggered?: boolean;
+  error?: string;
+};
+
+type UploadResponse = {
+  success?: boolean;
+  src?: string;
+  message?: string;
   commitUrl?: string;
   deployHookTriggered?: boolean;
   error?: string;
@@ -26,7 +35,8 @@ type EditorSection = {
   href?: string;
 };
 
-const lockedKeys = new Set(['href', 'src', 'coverImage', 'url', 'id', 'icon']);
+const lockedKeys = new Set(['href', 'url', 'id', 'icon']);
+const imageFieldKeys = new Set(['src', 'coverImage', 'backgroundImage', 'image', 'logo']);
 const primarySections: EditorSection[] = [
   { key: 'home', label: 'Home page', href: '/' },
   { key: 'about', label: 'About page', href: '/about' },
@@ -50,6 +60,112 @@ function humanize(value: string) {
 function shouldHideStringField(key: string, path: PathPart[]) {
   if (lockedKeys.has(key)) return true;
   return key === 'value' && path.includes('options');
+}
+
+function isImageField(key: string, value: JsonValue) {
+  if (imageFieldKeys.has(key)) return true;
+  return typeof value === 'string' && /^\/images\//.test(value);
+}
+
+function slotHintFromPath(path: PathPart[]) {
+  return path
+    .map((part) => String(part))
+    .filter((part) => part && part !== 'images' && part !== 'src')
+    .join('-')
+    .toLowerCase();
+}
+
+function ImageUploadField({
+  fieldKey,
+  path,
+  value,
+  onChange,
+}: {
+  fieldKey: string;
+  path: PathPart[];
+  value: JsonValue;
+  onChange: (path: PathPart[], value: JsonValue) => void;
+}) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
+  const currentSrc = typeof value === 'string' ? value : '';
+
+  async function handleFile(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setMessage('');
+    setError('');
+
+    const formData = new FormData();
+    formData.append('file', file);
+    const slot = slotHintFromPath(path) || file.name;
+    formData.append('slot', slot);
+
+    try {
+      const response = await fetch('/api/upload-image', { method: 'POST', body: formData });
+      const data = (await response.json().catch(() => null)) as UploadResponse | null;
+
+      if (!response.ok || !data?.src) {
+        throw new Error(data?.error || 'Could not upload the photo.');
+      }
+
+      onChange(path, data.src);
+      setMessage(data.message || 'Photo uploaded. Click Publish changes to save.');
+    } catch (uploadError) {
+      setError(uploadError instanceof Error ? uploadError.message : 'Could not upload the photo.');
+    } finally {
+      setUploading(false);
+      if (inputRef.current) inputRef.current.value = '';
+    }
+  }
+
+  return (
+    <div className="space-y-2">
+      <span className="block text-sm font-medium text-gray-700">{humanize(fieldKey === 'src' ? 'photo' : fieldKey)}</span>
+      <div className="flex items-start gap-4 rounded-lg border border-gray-300 bg-white p-3">
+        <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-md bg-gray-100">
+          {currentSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={currentSrc} alt="Current photo" className="h-full w-full object-cover" />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">No photo</div>
+          )}
+        </div>
+        <div className="flex-1 space-y-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => inputRef.current?.click()}
+              disabled={uploading}
+              className="btn-outline px-3 py-1.5 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {uploading ? 'Uploading…' : currentSrc ? 'Replace photo' : 'Upload photo'}
+            </button>
+            {currentSrc && (
+              <code className="break-all text-xs text-gray-500">{currentSrc}</code>
+            )}
+          </div>
+          <p className="text-xs text-gray-500">
+            JPG, PNG, WEBP, GIF, AVIF or SVG. Max 8 MB. After uploading, click <strong>Publish changes</strong> to save.
+          </p>
+          {message && <p className="text-xs text-green-700">{message}</p>}
+          {error && <p className="text-xs text-red-700">{error}</p>}
+        </div>
+      </div>
+      <input
+        ref={inputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif,image/svg+xml,image/avif"
+        className="hidden"
+        onChange={handleFile}
+      />
+    </div>
+  );
 }
 
 function setValueAtPath(value: JsonValue, path: PathPart[], nextValue: JsonValue): JsonValue {
@@ -85,6 +201,10 @@ function Field({
   onChange: (path: PathPart[], value: JsonValue) => void;
 }) {
   if (typeof value === 'string') {
+    if (isImageField(fieldKey, value)) {
+      return <ImageUploadField fieldKey={fieldKey} path={path} value={value} onChange={onChange} />;
+    }
+
     if (shouldHideStringField(fieldKey, path)) return null;
 
     const isLong = value.length > 80 || value.includes('.') || value.includes('\n');
