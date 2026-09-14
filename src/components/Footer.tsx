@@ -7,7 +7,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-foreground text-[#D8D0C4]">
+    <footer className="bg-foreground text-[#C9D8E0]">
       {/* Acknowledgement of Country */}
       <div className="bg-primary py-6">
         <div className="container">
@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <Image src={copy.global.images.logoFull.src} alt={config.name} width={220} height={100} className="mb-4 h-auto w-auto" />
+            <Image src={copy.global.images.logoFullLight.src} alt={config.name} width={220} height={100} className="mb-4 h-auto w-auto" />
             <p className="text-sm text-white/60">
               {copy.global.footer.tagline}
             </p>

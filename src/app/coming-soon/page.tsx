@@ -26,17 +26,17 @@ export default function ComingSoonPage() {
         className="object-cover opacity-45"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-[#2B241C]/75" />
+      <div className="absolute inset-0 bg-[#12283A]/75" />
       <div className="relative flex min-h-[100svh] items-center px-5 py-10 sm:px-8">
         <div className="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div className="max-w-3xl">
             <Image
-              src={copy.global.images.logoFull.src}
+              src={copy.global.images.logoFullLight.src}
               alt={config.name}
               width={230}
               height={100}
               priority
-              className="mb-10 h-auto w-44 rounded-sm bg-white/90 px-4 py-3 shadow-sm sm:w-56"
+              className="mb-10 h-auto w-44 sm:w-56"
             />
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#E7D39C]">
               {copy.global.countryBar}

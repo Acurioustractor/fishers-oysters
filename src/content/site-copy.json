@@ -35,11 +35,15 @@
     },
     "images": {
       "logoFull": {
-        "src": "/images/logo-full.png",
+        "src": "/images/logo-full.svg",
+        "alt": "Fisher's Oysters"
+      },
+      "logoFullLight": {
+        "src": "/images/logo-full-light.svg",
         "alt": "Fisher's Oysters"
       },
       "logoIcon": {
-        "src": "/images/logo-icon.png",
+        "src": "/images/logo-icon.svg",
         "alt": "Fisher's Oysters logo"
       }
     }
