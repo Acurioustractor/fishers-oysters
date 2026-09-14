@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#5A432C',
-        secondary: '#8A6F4D',
+        primary: '#1E4D6B',
+        secondary: '#3C7A96',
         accent: '#AFC1C4',
         background: '#EFF4F3',
-        foreground: '#2B241C',
+        foreground: '#12283A',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'Raleway', 'system-ui', 'sans-serif'],

@@ -35,11 +35,15 @@
     },
     "images": {
       "logoFull": {
-        "src": "/images/logo-full.png",
+        "src": "/images/logo-full.svg",
+        "alt": "Fisher's Oysters"
+      },
+      "logoFullLight": {
+        "src": "/images/logo-full-light.svg",
         "alt": "Fisher's Oysters"
       },
       "logoIcon": {
-        "src": "/images/logo-icon.png",
+        "src": "/images/logo-icon.svg",
         "alt": "Fisher's Oysters logo"
       }
     }
@@ -47,7 +51,7 @@
   "home": {
     "metadataDescription": "Fisher's Oysters is a family-run aquaculture business growing native rock oysters on Minjerribah, supporting reef restoration and creating pathways into aquaculture.",
     "hero": {
-      "title": "Working oyster farms on -ountry",
+      "title": "Working oyster farms on Country",
       "description": "Fisher's Oysters is a family-run aquaculture business growing native rock oysters, supporting reef restoration and creating pathways into aquaculture from Minjerribah, North Stradbroke Island.",
       "primaryCta": "Learn More",
       "secondaryCta": "Contact Us"

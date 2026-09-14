@@ -77,8 +77,8 @@ export default function Hero({
             ? 'bg-foreground/60'
             : backgroundImage
               ? isHome
-                ? 'bg-gradient-to-br from-black/60 via-[#5A432C]/35 to-black/50'
-                : 'bg-gradient-to-r from-black/65 via-[#5A432C]/45 to-black/55'
+                ? 'bg-gradient-to-b from-black/55 via-[#12283A]/65 to-black/60'
+                : 'bg-gradient-to-r from-black/65 via-[#1E4D6B]/45 to-black/55'
               : 'bg-gradient-to-br from-primary to-secondary'
         }`}
       />
@@ -91,7 +91,7 @@ export default function Hero({
               {subtitle}
             </p>
           )}
-          <h1 className={`font-display font-bold leading-[1.05] mb-6 ${isHome ? 'text-[clamp(2.4rem,6vw,5.25rem)] text-balance' : 'text-4xl md:text-5xl'}`}>
+          <h1 className={`font-display font-bold leading-[1.05] mb-6 [text-shadow:0_2px_16px_rgba(0,0,0,0.45)] ${isHome ? 'text-[clamp(2.4rem,6vw,5.25rem)] text-balance' : 'text-4xl md:text-5xl'}`}>
             {title}
           </h1>
           {description && (
